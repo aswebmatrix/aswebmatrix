@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My restaurants | Multi-page Restaurant</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- RESET & GLOBAL ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #faf7f2;
+      color: #2d2a24;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #eaddcf;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #b48c5c;
+      border-radius: 10px;
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background-color: #c79a5e;
+      border-radius: 4px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ----- HEADER & NAVIGATION ----- */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      color: #3e2e1f;
+      text-decoration: none;
+    }
+    .logo i {
+      color: #b48c5c;
+      font-size: 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2d2a24;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: #b48c5c;
+    }
+    .nav-links a.active {
+      color: #b48c5c;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background-color: #c79a5e;
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: #2d2a24;
+      cursor: pointer;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 5rem 2rem;
+      margin-bottom: 3rem;
+    }
+    .page-header h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      font-size: 1.4rem;
+      opacity: 0.9;
+    }
+
+    /* Cards Grid */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      padding: 3rem 0;
+    }
+
+    .item-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+      border: 1px solid rgba(199, 154, 94, 0.1);
+    }
+    .item-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 40px -15px rgba(180, 140, 92, 0.3);
+    }
+    .item-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .item-card:hover img {
+      transform: scale(1.05);
+    }
+    .card-content {
+      padding: 1.8rem;
+    }
+    .card-content h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+      color: #3e2e1f;
+    }
+    .card-content p {
+      color: #5f5a54;
+      margin-bottom: 1.2rem;
+    }
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+    }
+    .price {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #c79a5e;
+    }
+    .btn-small {
+      padding: 8px 20px;
+      background: #c79a5e;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .btn-small:hover {
+      background: #b48c5c;
+      transform: translateY(-2px);
+    }
+
+    /* Menu Categories */
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 2rem 0 3rem;
+    }
+    .category-tab {
+      padding: 10px 30px;
+      background: white;
+      border: 2px solid #eaddcf;
+      border-radius: 40px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .category-tab:hover,
+    .category-tab.active {
+      background: #c79a5e;
+      border-color: #c79a5e;
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      background: #2d2a24;
+      color: #ddd6cc;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+    footer span {
+      color: #c79a5e;
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        transition: left 0.5s ease;
+        z-index: 99;
+      }
+      .nav-links.active {
+        left: 0;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .page-header h1 {
+        font-size: 2.8rem;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <i class="fas fa-utensils"></i>
+        <span>My<span style="color:#b48c5c;">Restaurants</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Home Page -->
+    <div id="home-page">
+      <section class="hero" style="height: 80vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover fixed; display: flex; align-items: center; justify-content: center; text-align: center; color: white;">
+        <div>
+          <h1 style="font-size: 5rem; margin-bottom: 1rem;">My restaurants</h1>
+          <p style="font-size: 1.8rem; margin-bottom: 2rem;">Where every meal is a masterpiece</p>
+          <a href="menu.html" class="btn" style="padding: 15px 45px; background: #c79a5e; color: white; text-decoration: none; border-radius: 50px; font-size: 1.2rem;">Explore Menu</a>
+        </div>
+      </section>
+
+      <section style="padding: 5rem 0; text-align: center; background: #f5efe8;">
+        <div class="container">
+          <h2 class="section-title" style="margin-bottom: 3rem;">Featured Items</h2>
+          <div class="items-grid">
+            <!-- Item 1 -->
+            <div class="item-card">
+              <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Grilled Salmon">
+              <div class="card-content">
+                <h3>Grilled Salmon</h3>
+                <p>Fresh Atlantic salmon with herbs & lemon butter sauce</p>
+                <div class="card-footer">
+                  <span class="price">$28</span>
+                  <a href="menu.html" class="btn-small">View Details</a>
+                </div>
+              </div>
+            </div>
+            <!-- Item 2 -->
+            <div class="item-card">
+              <img src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Truffle Pasta">
+              <div class="card-content">
+                <h3>Truffle Pasta</h3>
+                <p>Homemade fettuccine with black truffle and parmesan</p>
+                <div class="card-footer">
+                  <span class="price">$24</span>
+                  <a href="menu.html" class="btn-small">View Details</a>
+                </div>
+              </div>
+            </div>
+            <!-- Item 3 -->
+            <div class="item-card">
+              <img src="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Tiramisu">
+              <div class="card-content">
+                <h3>Classic Tiramisu</h3>
+                <p>Italian dessert with mascarpone and espresso</p>
+                <div class="card-footer">
+                  <span class="price">$12</span>
+                  <a href="menu.html" class="btn-small">View Details</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- About Page (hidden initially) -->
+    <div id="about-page" style="display: none;">
+      <div class="page-header">
+        <h1>About My restaurants</h1>
+        <p>Our story, passion & philosophy</p>
+      </div>
+      <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin: 3rem 0;">
+          <div>
+            <h2 class="section-title">Our Journey</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 1.5rem;">Founded in 2010 by chef Alberto AS Web, My restaurants began as a small family kitchen with a big dream. Today, we stand as a beacon of culinary excellence, blending traditional recipes with contemporary flair.</p>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">We believe in sustainable sourcing, supporting local farmers, and creating dishes that tell a story. Every plate that leaves our kitchen is a testament to our dedication.</p>
+            <div style="font-family: 'Playfair Display'; font-size: 2rem; color: #c79a5e;">— Alberto AS Web</div>
+          </div>
+          <div>
+            <img src="https://images.pexels.com/photos/4253312/pexels-photo-4253312.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Chef Alberto" style="width: 100%; border-radius: 30px; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);">
+          </div>
+        </div>
+        
+        <div style="margin: 5rem 0;">
+          <h2 class="section-title">Our Values</h2>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem;">
+            <div style="text-align: center;">
+              <i class="fas fa-leaf" style="font-size: 3rem; color: #c79a5e; margin-bottom: 1rem;"></i>
+              <h3>Fresh & Local</h3>
+              <p>We source ingredients daily from local farmers and markets.</p>
+            </div>
+            <div style="text-align: center;">
+              <i class="fas fa-heart" style="font-size: 3rem; color: #c79a5e; margin-bottom: 1rem;"></i>
+              <h3>Made with Love</h3>
+              <p>Every dish is prepared with passion and attention to detail.</p>
+            </div>
+            <div style="text-align: center;">
+              <i class="fas fa-hand-sparkles" style="font-size: 3rem; color: #c79a5e; margin-bottom: 1rem;"></i>
+              <h3>Hygiene First</h3>
+              <p>Highest standards of cleanliness and food safety.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu Page -->
+    <div id="menu-page" style="display: none;">
+      <div class="page-header">
+        <h1>Our Menu</h1>
+        <p>Crafted with seasonal ingredients</p>
+      </div>
+      <div class="container">
+        <div class="category-tabs">
+          <button class="category-tab active" data-category="all">All</button>
+          <button class="category-tab" data-category="starters">Starters</button>
+          <button class="category-tab" data-category="mains">Main Course</button>
+          <button class="category-tab" data-category="desserts">Desserts</button>
+          <button class="category-tab" data-category="beverages">Beverages</button>
+        </div>
+
+        <div class="items-grid" id="menu-items">
+          <!-- Starters -->
+          <div class="item-card" data-category="starters">
+            <img src="https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Bruschetta">
+            <div class="card-content">
+              <h3>Bruschetta Trio</h3>
+              <p>Tomato, basil, and balsamic on crispy bread</p>
+              <div class="card-footer">
+                <span class="price">$14</span>
+                <button class="btn-small">Order</button>
+              </div>
+            </div>
+          </div>
+          <div class="item-card" data-category="starters">
+            <img src="https://images.pexels.com/photos/1199960/pexels-photo-1199960.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Calamari">
+            <div class="card-content">
+              <h3>Fried Calamari</h3>
+              <p>Crispy squid with spicy aioli</p>
+              <div class="card-footer">
+                <span class="price">$16</span>
+                <button class="btn-small">Order</button>
+              </div>
+            </div>
+          </div>
+          <!-- Mains -->
+          <div class="item-card" data-category="mains">
+            <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Salmon">
+            <div class="card-content">
+              <h3>Grilled Salmon</h3>
+              <p>With lemon butter sauce and vegetables</p>
+              <div class="card-footer">
+                <span class="price">$28</span>
+                <button class="btn-small">Order</button>
+              </div>
+            </div>
+          </div>
+          <div class="item-card" data-category="mains">
+            <img src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Pasta">
+            <div class="card-content">
+              <h3>Truffle Pasta</h3>
+              <p>Fresh fettuccine with black truffle</p>
+              <div class="card-footer">
+                <span class="price">$24</span>
+                <button class="btn-small">Order</button>
+              </div>
+            </div>
+          </div>
+          <div class="item-card" data-category="mains">
+            <img src="https://images.pexels.com/photos/3659862/pexels-photo-3659862.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Steak">
+            <div class="card-content">
+              <h3>Ribeye Steak</h3>
+              <p>200g grass-fed beef with rosemary</p>
+              <div class="card-footer">
+                <span class="price">$34</span>
+                <button class="btn-small">Order</button>
+              </div>
+            </div>
+          </div>
+          <!-- Desserts -->
+          <div class="item-card" data-category="desserts">
+            <img src="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Tiramisu">
+            <div class="card-content">
+              <h3>Classic Tiramisu</h3>
+              <p>Layered Italian dessert</p>
+              <div class="card-footer">
+                <span class="price">$12</span>
+                <button class="btn-small">Order</button>
+              </div>
+            </div>
+          </div>
+          <div class="item-card" data-category="desserts">
+            <img src="https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Cheesecake">
+            <div class="card-content">
+              <h3>Berry Cheesecake</h3>
+              <p>Creamy with mixed berry compote</p>
+              <div class="card-footer">
+                <span class="price">$11</span>
+                <button class="btn-small">Order</button>
+              </div>
+            </div>
+          </div>
+          <!-- Beverages -->
+          <div class="item-card" data-category="beverages">
+            <img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Wine">
+            <div class="card-content">
+              <h3>House Wine</h3>
+              <p>Glass of red or white</p>
+              <div class="card-footer">
+                <span class="price">$9</span>
+                <button class="btn-small">Order</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact-page" style="display: none;">
+      <div class="page-header">
+        <h1>Contact Us</h1>
+        <p>We'd love to hear from you</p>
+      </div>
+      <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin: 3rem 0;">
+          <div>
+            <h2 class="section-title">Get in Touch</h2>
+            <div style="margin: 2rem 0;">
+              <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                <i class="fas fa-map-marker-alt" style="font-size: 2rem; color: #c79a5e;"></i>
+                <div>
+                  <h3>Address</h3>
+                  <p>22B, Connaught Place, New Delhi - 110001</p>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                <i class="fas fa-phone" style="font-size: 2rem; color: #c79a5e;"></i>
+                <div>
+                  <h3>Phone</h3>
+                  <p>+91 11 2233 4455</p>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                <i class="fas fa-envelope" style="font-size: 2rem; color: #c79a5e;"></i>
+                <div>
+                  <h3>Email</h3>
+                  <p>reserve@AS Webpermium.com</p>
+                </div>
+              </div>
+            </div>
+            <div style="background: #f5efe8; padding: 2rem; border-radius: 20px;">
+              <h3 style="margin-bottom: 1rem;">Opening Hours</h3>
+              <p>Monday - Friday: 12:00 PM – 11:00 PM</p>
+              <p>Saturday - Sunday: 10:00 AM – 12:00 AM</p>
+            </div>
+          </div>
+          <div>
+            <img src="https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Restaurant location" style="width: 100%; border-radius: 30px; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);">
+            <p style="text-align: center; margin-top: 1rem;"><i class="fas fa-car"></i> Free valet parking available</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 My restaurants — <span>professional</span> taste since 2010. All rights reserved.</p>
+  </footer>
+
+  <script>
+    (function() {
+      // Mobile menu toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+      
+      if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+          const icon = menuToggle.querySelector('i');
+          if (navLinks.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        });
+      }
+
+      // Page navigation system
+      const pages = {
+        home: document.getElementById('home-page'),
+        about: document.getElementById('about-page'),
+        menu: document.getElementById('menu-page'),
+        contact: document.getElementById('contact-page')
+      };
+
+      const navLinks_ = document.querySelectorAll('.nav-links a');
+      
+      function showPage(pageId) {
+        // Hide all pages
+        Object.values(pages).forEach(page => {
+          if (page) page.style.display = 'none';
+        });
+        
+        // Show selected page
+        if (pages[pageId]) {
+          pages[pageId].style.display = 'block';
+        }
+
+        // Update active class on nav links
+        navLinks_.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `${pageId}.html` || 
+              (pageId === 'home' && link.getAttribute('href') === 'index.html')) {
+            link.classList.add('active');
+          }
+        });
+
+        // Close mobile menu if open
+        if (navLinks.classList.contains('active')) {
+          navLinks.classList.remove('active');
+          const icon = menuToggle?.querySelector('i');
+          if (icon) {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        }
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Handle navigation clicks
+      navLinks_.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const href = link.getAttribute('href');
+          
+          if (href === 'index.html') {
+            showPage('home');
+          } else if (href === 'about.html') {
+            showPage('about');
+          } else if (href === 'menu.html') {
+            showPage('menu');
+          } else if (href === 'contact.html') {
+            showPage('contact');
+          }
+        });
+      });
+
+      // Show home page by default
+      showPage('home');
+
+      // Menu category filtering
+      const categoryTabs = document.querySelectorAll('.category-tab');
+      const menuItems = document.querySelectorAll('#menu-items .item-card');
+
+      if (categoryTabs.length > 0) {
+        categoryTabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            // Update active tab
+            categoryTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const category = tab.dataset.category;
+
+            // Filter items
+            menuItems.forEach(item => {
+              if (category === 'all' || item.dataset.category === category) {
+                item.style.display = 'block';
+              } else {
+                item.style.display = 'none';
+              }
+            });
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

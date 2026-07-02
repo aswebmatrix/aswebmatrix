@@ -1,0 +1,1250 @@
+/* ============================================================================
+   AS WEB MATRIX — HOME PAGE STYLES
+   Design tokens are scoped to .home-page so they never leak into the rest
+   of the app. Swap the @import for next/font in layout.tsx for production
+   performance if you'd like — this keeps the CSS drop-in for now.
+============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+.home-page {
+  /* Color */
+  --ink: #0a1f1c;
+  --ink-soft: #102b26;
+  --paper: #f7f9f5;
+  --paper-dim: #eef2ec;
+  --teal: #00c49a;
+  --teal-dark: #00876a;
+  --teal-tint: rgba(0, 196, 154, 0.12);
+  --amber: #f4a261;
+  --slate: #5b6b66;
+  --slate-light: #8a988f;
+  --line: #e3e8e1;
+  --white: #ffffff;
+
+  /* Type */
+  --font-display: 'Sora', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+
+  /* Shape */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-sm: 0 2px 10px rgba(10, 31, 28, 0.06);
+  --shadow-md: 0 12px 32px rgba(10, 31, 28, 0.10);
+  --shadow-teal: 0 14px 32px rgba(0, 196, 154, 0.28);
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.home-page * {
+  box-sizing: border-box;
+}
+
+.home-page .container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.home-page h1,
+.home-page h2,
+.home-page h3 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.home-page p {
+  color: var(--slate);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.home-page section {
+  position: relative;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .home-page * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================================================
+   SECTION HEADERS (shared)
+============================================================================ */
+
+.home-page .section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 56px;
+}
+
+.home-page .section-subtitle {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+  margin-bottom: 14px;
+}
+
+.home-page .section-title {
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 700;
+}
+
+.home-page .section-title span {
+  color: var(--teal-dark);
+}
+
+.home-page .section-description {
+  margin-top: 14px;
+  font-size: 16px;
+}
+
+/* ============================================================================
+   STICKY WHATSAPP
+============================================================================ */
+
+.home-page .sticky-whatsapp {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #25d366;
+  color: var(--white);
+  padding: 12px 22px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: var(--font-body);
+  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.4);
+  z-index: 999;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.home-page .sticky-whatsapp:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.5);
+}
+
+.home-page .sticky-whatsapp i {
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .home-page .sticky-whatsapp span {
+    display: none;
+  }
+  .home-page .sticky-whatsapp {
+    padding: 14px;
+    border-radius: 50%;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+/* ============================================================================
+   HERO
+============================================================================ */
+
+.home-page .hero {
+  background: linear-gradient(160deg, var(--ink) 0%, var(--ink-soft) 65%, #0d3530 100%);
+  padding: 150px 0 110px;
+  overflow: hidden;
+}
+
+.home-page .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(0, 196, 154, 0.18), transparent 45%),
+    radial-gradient(circle at 88% 80%, rgba(244, 162, 97, 0.10), transparent 50%);
+  pointer-events: none;
+}
+
+/* Signature element: a faint ascending growth line behind the hero copy —
+   a literal "results going up" mark for a results-driven agency. */
+.home-page .hero-graph {
+  position: absolute;
+  right: -4%;
+  bottom: -6%;
+  width: 64%;
+  max-width: 640px;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.home-page .hero-graph svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.home-page .hero-graph-fill {
+  fill: rgba(0, 196, 154, 0.10);
+}
+
+.home-page .hero-graph-line {
+  fill: none;
+  stroke: var(--teal);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.85;
+}
+
+.home-page .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+}
+
+.home-page .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--teal-tint);
+  border: 1px solid rgba(0, 196, 154, 0.35);
+  color: var(--teal);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 50px;
+  margin-bottom: 24px;
+}
+
+.home-page .hero h1 {
+  font-size: clamp(34px, 5.5vw, 56px);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.home-page .hero h1 .highlight {
+  color: var(--teal);
+  position: relative;
+}
+
+.home-page .hero-description {
+  font-size: 18px;
+  color: rgba(247, 249, 245, 0.78);
+  max-width: 540px;
+  margin-bottom: 28px;
+}
+
+.home-page .hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.home-page .hero-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.home-page .hero-stats i {
+  color: var(--amber);
+}
+
+.home-page .hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* CTA button system */
+.home-page .cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 15px 30px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.home-page .cta-button.primary {
+  background: var(--teal);
+  color: var(--ink);
+  box-shadow: var(--shadow-teal);
+}
+
+.home-page .cta-button.primary:hover {
+  background: var(--teal-dark);
+  color: var(--white);
+  transform: translateY(-3px);
+}
+
+.home-page .cta-button.whatsapp {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.home-page .cta-button.whatsapp:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-3px);
+}
+
+.home-page .cta-button.large {
+  padding: 18px 38px;
+  font-size: 16px;
+}
+
+.home-page .cta-button.outline {
+  background: transparent;
+  color: var(--white);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+}
+
+.home-page .cta-button.outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+}
+
+/* ============================================================================
+   TRUST STRIP
+============================================================================ */
+
+.home-page .trust-section {
+  background: var(--white);
+  padding: 0;
+  margin-top: -56px;
+  position: relative;
+  z-index: 3;
+}
+
+.home-page .trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 36px 24px;
+}
+
+.home-page .trust-card {
+  text-align: center;
+  position: relative;
+  padding: 0 12px;
+}
+
+.home-page .trust-card:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -9px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--line);
+}
+
+.home-page .trust-number {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--teal-dark);
+}
+
+.home-page .trust-label {
+  font-size: 13px;
+  color: var(--slate);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.home-page .trust-card > i {
+  display: block;
+  margin-top: 10px;
+  font-size: 18px;
+  color: var(--slate-light);
+}
+
+.home-page .trust-card .stars {
+  margin-top: 6px;
+  color: var(--amber);
+  font-size: 13px;
+}
+
+/* ============================================================================
+   ABOUT SECTION
+============================================================================ */
+
+.home-page .about-section {
+  padding: 110px 0 90px;
+  background: var(--paper);
+}
+
+.home-page .about-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.home-page .about-content p {
+  margin-bottom: 20px;
+  font-size: 15.5px;
+}
+
+.home-page .about-content p:last-child {
+  margin-bottom: 0;
+}
+
+.home-page .about-highlights {
+  background: var(--ink);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 24px;
+}
+
+.home-page .about-highlights h3 {
+  color: var(--white);
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+
+.home-page .about-list {
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.home-page .about-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: rgba(247, 249, 245, 0.85);
+  font-size: 14.5px;
+  font-weight: 500;
+}
+
+.home-page .about-list-icon {
+  color: var(--teal);
+  font-size: 15px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.home-page .about-cta-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--teal);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px 0;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.home-page .about-cta-btn:hover {
+  background: var(--teal-dark);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.home-page .about-closing {
+  text-align: center;
+  max-width: 760px;
+  margin: 56px auto 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  font-family: var(--font-display);
+}
+
+@media (max-width: 900px) {
+  .home-page .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .home-page .about-highlights {
+    position: static;
+  }
+}
+
+/* ============================================================================
+   CLIENT SHOWCASE
+============================================================================ */
+
+.home-page .clients-showcase {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.home-page .clients-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.home-page .client-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 30px 20px;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+}
+
+.home-page .client-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--teal);
+}
+
+.home-page .client-card.featured {
+  background: linear-gradient(165deg, var(--teal-tint), var(--paper));
+}
+
+.home-page .client-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: var(--ink);
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin: 0 auto 16px;
+}
+
+.home-page .client-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.home-page .client-card p {
+  font-size: 13px;
+  margin: 0;
+}
+
+.home-page .client-tag {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--teal-dark);
+  background: var(--teal-tint);
+  padding: 4px 12px;
+  border-radius: 50px;
+}
+
+/* ============================================================================
+   SERVICES
+============================================================================ */
+
+.home-page .services-section {
+  padding: 100px 0;
+  background: var(--paper);
+}
+
+.home-page .services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.home-page .services-grid.second-row {
+  margin-top: 24px;
+}
+
+.home-page .service-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 32px 26px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.home-page .service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.home-page .service-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 20px;
+  margin-bottom: 18px;
+}
+
+.home-page .service-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.home-page .service-card p {
+  font-size: 14px;
+}
+
+/* ============================================================================
+   PORTFOLIO
+============================================================================ */
+
+.home-page .portfolio-section {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.home-page .portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.home-page .portfolio-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 16px;
+}
+
+.home-page .portfolio-card p {
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.home-page .portfolio-image {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--paper-dim);
+}
+
+.home-page .portfolio-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.home-page .portfolio-card:hover .portfolio-image img {
+  transform: scale(1.06);
+}
+
+.home-page .portfolio-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 31, 28, 0.1) 0%, rgba(10, 31, 28, 0.92) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.home-page .portfolio-card:hover .portfolio-overlay {
+  opacity: 1;
+}
+
+.home-page .portfolio-category {
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.home-page .portfolio-result {
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.home-page .live-preview-btn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--teal);
+  color: var(--ink);
+  border: none;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 9px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.home-page .live-preview-btn:hover {
+  background: var(--white);
+}
+
+/* ============================================================================
+   RESULTS
+============================================================================ */
+
+.home-page .results-section {
+  padding: 90px 0;
+  background: var(--ink);
+}
+
+.home-page .results-section .section-title,
+.home-page .results-section .section-subtitle {
+  color: var(--white);
+}
+
+.home-page .results-section .section-subtitle {
+  color: var(--teal);
+}
+
+.home-page .results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.home-page .result-card {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 36px 20px;
+}
+
+.home-page .result-number {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.home-page .result-label {
+  font-size: 13.5px;
+  color: rgba(247, 249, 245, 0.7);
+  margin-top: 6px;
+}
+
+.home-page .result-card > i {
+  display: block;
+  margin-top: 14px;
+  font-size: 18px;
+  color: var(--amber);
+}
+
+/* ============================================================================
+   PROCESS
+============================================================================ */
+
+.home-page .process-section {
+  padding: 100px 0;
+  background: var(--paper);
+}
+
+.home-page .process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+}
+
+.home-page .process-step {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 32px 24px;
+  position: relative;
+}
+
+.home-page .step-number {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--slate-light);
+  letter-spacing: 0.08em;
+  margin-bottom: 18px;
+}
+
+.home-page .step-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--teal-tint);
+  color: var(--teal-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  margin-bottom: 16px;
+}
+
+.home-page .process-step h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.home-page .process-step p {
+  font-size: 13.5px;
+}
+
+/* ============================================================================
+   WHY CHOOSE US
+============================================================================ */
+
+.home-page .why-choose-us {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.home-page .why-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.home-page .why-card {
+  text-align: center;
+  padding: 28px 16px;
+}
+
+.home-page .why-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin: 0 auto 18px;
+}
+
+.home-page .why-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.home-page .why-card p {
+  font-size: 13px;
+}
+
+/* ============================================================================
+   GOOGLE REVIEWS
+============================================================================ */
+
+.home-page .reviews-section {
+  padding: 100px 0;
+  background: var(--paper);
+}
+
+.home-page .google-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.home-page .google-icon {
+  color: #4285f4;
+  font-size: 18px;
+}
+
+.home-page .google-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.home-page .rating-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.home-page .stars-container {
+  display: flex;
+  gap: 2px;
+  color: var(--amber);
+  font-size: 15px;
+}
+
+.home-page .rating-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.home-page .rating-count {
+  color: var(--slate);
+  font-size: 14px;
+}
+
+.home-page .reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.home-page .review-card-inner {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 26px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.home-page .review-card-inner:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.home-page .review-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.home-page .reviewer-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--teal-tint);
+  color: var(--teal-dark);
+  font-family: var(--font-display);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.home-page .reviewer-name {
+  font-size: 14.5px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.home-page .review-time {
+  font-size: 12px;
+  color: var(--slate-light);
+}
+
+.home-page .review-rating {
+  color: var(--amber);
+  font-size: 13px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 2px;
+}
+
+.home-page .review-text {
+  font-size: 14px;
+  flex-grow: 1;
+  margin-bottom: 16px;
+}
+
+.home-page .review-source {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--slate-light);
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.home-page .source-icon {
+  font-size: 12px;
+}
+
+/* ============================================================================
+   FINAL CTA
+============================================================================ */
+
+.home-page .final-cta {
+  padding: 100px 0;
+  background: linear-gradient(135deg, var(--ink) 0%, #0d3530 100%);
+  text-align: center;
+}
+
+.home-page .cta-content h2 {
+  color: var(--white);
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.home-page .cta-content p {
+  color: rgba(247, 249, 245, 0.75);
+  font-size: 17px;
+  margin-bottom: 34px;
+}
+
+.home-page .cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================================
+   CONTACT INFO
+============================================================================ */
+
+.home-page .contact-info-section {
+  padding: 60px 0;
+  background: var(--white);
+  border-top: 1px solid var(--line);
+}
+
+.home-page .contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.home-page .contact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.home-page .contact-item > i {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: var(--teal-tint);
+  color: var(--teal-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.home-page .contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.home-page .contact-details > span:first-child {
+  font-size: 12px;
+  color: var(--slate-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.home-page .contact-details a,
+.home-page .contact-details span:last-child {
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.home-page .contact-details a:hover {
+  color: var(--teal-dark);
+}
+
+/* ============================================================================
+   STAR ICON COLORS (used by renderStars helper)
+============================================================================ */
+
+.home-page .star-filled,
+.home-page .star-half {
+  color: var(--amber);
+}
+
+.home-page .star-empty {
+  color: var(--line);
+}
+
+/* ============================================================================
+   ANIMATIONS
+============================================================================ */
+
+@keyframes homeFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes homeSlideUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.home-page .animate-fade-in {
+  animation: homeFadeIn 0.6s ease both;
+}
+
+.home-page .animate-slide-up {
+  animation: homeSlideUp 0.6s ease 0.1s both;
+}
+
+.home-page .animate-slide-up-delay {
+  animation: homeSlideUp 0.6s ease 0.25s both;
+}
+
+.home-page .animate-slide-up-delay-2 {
+  animation: homeSlideUp 0.6s ease 0.4s both;
+}
+
+/* Visible keyboard focus across interactive elements */
+.home-page a:focus-visible,
+.home-page button:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
+/* ============================================================================
+   RESPONSIVE
+============================================================================ */
+
+@media (max-width: 1024px) {
+  .home-page .trust-grid,
+  .home-page .clients-grid,
+  .home-page .services-grid,
+  .home-page .portfolio-grid,
+  .home-page .results-grid,
+  .home-page .process-steps,
+  .home-page .why-grid,
+  .home-page .reviews-grid,
+  .home-page .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-page .clients-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page .hero {
+    padding: 130px 0 90px;
+    text-align: left;
+  }
+
+  .home-page .hero-graph {
+    width: 90%;
+    bottom: -10%;
+    opacity: 0.5;
+  }
+
+  .home-page .section-header {
+    margin-bottom: 40px;
+  }
+
+  .home-page .trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 28px 18px;
+  }
+
+  .home-page .trust-card:nth-child(2)::after {
+    display: none;
+  }
+
+  .home-page .about-section,
+  .home-page .clients-showcase,
+  .home-page .services-section,
+  .home-page .portfolio-section,
+  .home-page .results-section,
+  .home-page .process-section,
+  .home-page .why-choose-us,
+  .home-page .reviews-section,
+  .home-page .final-cta {
+    padding: 64px 0;
+  }
+
+  .home-page .clients-grid,
+  .home-page .services-grid,
+  .home-page .portfolio-grid,
+  .home-page .results-grid,
+  .home-page .process-steps,
+  .home-page .why-grid,
+  .home-page .reviews-grid,
+  .home-page .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page .cta-buttons,
+  .home-page .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .home-page .cta-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page .container {
+    padding: 0 18px;
+  }
+
+  .home-page .hero h1 {
+    font-size: 30px;
+  }
+}

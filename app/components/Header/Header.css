@@ -1,0 +1,446 @@
+/* ============================================================================
+   Header.css — AS Web Matrix
+   Shares the same brand tokens as the home page (teal / ink / amber) so the
+   navbar and the rest of the site read as one consistent product, not two
+   separate templates stitched together.
+============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --hm-ink: #0a1f1c;
+  --hm-ink-soft: #102b26;
+  --hm-paper: #f7f9f5;
+  --hm-teal: #00c49a;
+  --hm-teal-dark: #00876a;
+  --hm-amber: #f4a261;
+  --hm-line: #e3e8e1;
+  --hm-white: #ffffff;
+  --hm-font-display: 'Sora', 'Segoe UI', sans-serif;
+  --hm-font-body: 'Inter', 'Segoe UI', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ============================================================================
+   HEADER SHELL
+   Transparent over the dark hero on load, solidifies to a clean white bar
+   once the page scrolls past the hero — so it never fights the hero's own
+   background and never looks washed out lower on the page.
+============================================================================ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  z-index: 1000;
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.header.scrolled {
+  background: rgba(247, 249, 245, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--hm-line);
+  box-shadow: 0 8px 24px rgba(10, 31, 28, 0.08);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 86px;
+  position: relative;
+  transition: height 0.3s ease;
+}
+
+.header.scrolled .navbar {
+  height: 74px;
+}
+
+/* ============================================================================
+   LOGO
+============================================================================ */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo1 {
+  height: 46px;
+  width: auto;
+  transition: transform 0.25s ease;
+}
+
+.logo1:hover {
+  transform: scale(1.04);
+}
+
+.company-name {
+  font-family: var(--hm-font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--hm-white);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  padding-left: 16px;
+  display: none;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.header.scrolled .company-name {
+  color: var(--hm-ink);
+  border-left-color: var(--hm-line);
+}
+
+.company-name span {
+  color: var(--hm-ink);
+  background: var(--hm-teal);
+  padding: 2px 9px;
+  border-radius: 6px;
+  margin-left: 6px;
+  font-size: 0.9rem;
+}
+
+/* ============================================================================
+   NAV MENU (desktop)
+============================================================================ */
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li {
+  position: relative;
+}
+
+.nav-menu a {
+  display: inline-flex;
+  align-items: center;
+  color: var(--hm-white);
+  text-decoration: none;
+  font-family: var(--hm-font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 10px 16px;
+  border-radius: 50px;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+.header.scrolled .nav-menu a {
+  color: var(--hm-ink-soft);
+}
+
+.nav-menu a:hover {
+  color: var(--hm-white);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.header.scrolled .nav-menu a:hover {
+  color: var(--hm-teal-dark);
+  background: rgba(0, 196, 154, 0.1);
+}
+
+.nav-menu a.active {
+  color: var(--hm-ink);
+  background: var(--hm-teal);
+  font-weight: 700;
+}
+
+.header.scrolled .nav-menu a.active {
+  color: var(--hm-ink);
+  background: var(--hm-teal);
+}
+
+.nav-menu a.active:hover {
+  background: var(--hm-teal-dark);
+  color: var(--hm-white);
+}
+
+/* Remove the old underline mechanics — the pill background above already
+   communicates state, an underline on top of a pill reads as noise. */
+.nav-menu a::after,
+.nav-menu a.active::after {
+  content: none;
+}
+
+/* ============================================================================
+   MENU TOGGLE (mobile)
+============================================================================ */
+
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  color: var(--hm-white);
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.header.scrolled .menu-toggle {
+  background: var(--hm-paper);
+  border-color: var(--hm-line);
+  color: var(--hm-ink);
+}
+
+.menu-toggle:hover {
+  background: var(--hm-teal);
+  border-color: var(--hm-teal);
+  color: var(--hm-ink);
+}
+
+.menu-toggle i {
+  font-size: 1.15rem;
+}
+
+/* ============================================================================
+   ANIMATIONS
+============================================================================ */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .navbar,
+  .nav-menu a,
+  .logo1,
+  .menu-toggle {
+    transition: none;
+  }
+}
+
+/* ============================================================================
+   DESKTOP
+============================================================================ */
+
+@media (min-width: 992px) {
+  .company-name {
+    display: block;
+  }
+
+  .nav-menu {
+    display: flex !important;
+  }
+}
+
+/* ============================================================================
+   TABLET / MOBILE — slide-in panel
+============================================================================ */
+
+@media (max-width: 991px) {
+  .navbar {
+    height: 76px;
+  }
+
+  .header.scrolled .navbar {
+    height: 70px;
+  }
+
+  .logo1 {
+    height: 40px;
+  }
+
+  .logo {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100vh;
+    background: var(--hm-ink);
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 110px 22px 40px;
+    gap: 10px;
+    transition: right 0.35s ease;
+    overflow-y: auto;
+    z-index: 999;
+    box-shadow: -10px 0 30px rgba(10, 31, 28, 0.25);
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-menu li {
+    width: 100%;
+  }
+
+  .nav-menu a {
+    display: block;
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 1rem;
+    color: rgba(247, 249, 245, 0.85);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    text-align: left;
+  }
+
+  .header.scrolled .nav-menu a {
+    color: rgba(247, 249, 245, 0.85);
+  }
+
+  .nav-menu a:hover {
+    background: rgba(0, 196, 154, 0.14);
+    color: var(--hm-white);
+    border-color: var(--hm-teal);
+  }
+
+  .header.scrolled .nav-menu a:hover {
+    background: rgba(0, 196, 154, 0.14);
+    color: var(--hm-white);
+  }
+
+  .nav-menu a.active {
+    background: var(--hm-teal);
+    color: var(--hm-ink);
+    border-color: var(--hm-teal);
+  }
+
+  .header.scrolled .nav-menu a.active {
+    color: var(--hm-ink);
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+}
+
+/* Backdrop behind the slide-in panel */
+.nav-menu.active::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 31, 28, 0.55);
+  z-index: -1;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ============================================================================
+   SMALL MOBILE
+============================================================================ */
+
+@media (max-width: 576px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .navbar,
+  .header.scrolled .navbar {
+    height: 68px;
+  }
+
+  .logo1 {
+    height: 36px;
+  }
+
+  .menu-toggle {
+    width: 38px;
+    height: 38px;
+  }
+
+  .nav-menu {
+    width: 86%;
+    padding: 100px 20px 32px;
+  }
+
+  .nav-menu a {
+    padding: 13px 16px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .company-name {
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    padding-left: 10px;
+  }
+
+  .nav-menu {
+    width: 90%;
+  }
+}
+
+/* ============================================================================
+   SCROLLBAR (mobile panel)
+============================================================================ */
+
+.nav-menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.nav-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.nav-menu::-webkit-scrollbar-thumb {
+  background: var(--hm-teal);
+  border-radius: 4px;
+}
+
+/* ============================================================================
+   PRINT
+============================================================================ */
+
+@media print {
+  .header {
+    position: static;
+    background: var(--hm-white);
+    border-bottom: 2px solid var(--hm-ink);
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .nav-menu {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    background: transparent;
+  }
+
+  .nav-menu a {
+    color: var(--hm-ink);
+    background: transparent;
+  }
+}

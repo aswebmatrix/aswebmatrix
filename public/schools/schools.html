@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AS Web School of Excellence | Where Futures Begin</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ----- RESET & GLOBAL ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #fefefe;
+      color: #333333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar - Professional Blue */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f0f4f8;
+      border-left: 2px solid #1e3c72;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      border-radius: 6px;
+      border: 2px solid #f0f4f8;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #2a5298, #1e3c72);
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-size: 3.2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+      color: #1e3c72;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, #1e3c72, #ffd700);
+      border-radius: 4px;
+    }
+
+    .section-title.light {
+      color: #ffffff;
+    }
+    .section-title.light::after {
+      background: linear-gradient(90deg, #ffd700, #ffffff);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 14px 35px;
+      background: #1e3c72;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      border: 2px solid #1e3c72;
+      font-size: 1rem;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: transparent;
+      color: #1e3c72;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(30, 60, 114, 0.3);
+    }
+    .btn-gold {
+      background: #ffd700;
+      border-color: #ffd700;
+      color: #1e3c72;
+    }
+    .btn-gold:hover {
+      background: transparent;
+      color: #ffd700;
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+    }
+
+    /* ----- HEADER & NAVIGATION ----- */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border-bottom: 3px solid #1e3c72;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1.8rem;
+      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+      color: #1e3c72;
+      text-decoration: none;
+    }
+    .logo i {
+      color: #ffd700;
+      font-size: 2.2rem;
+    }
+    .logo span {
+      color: #1e3c72;
+    }
+    .logo span.highlight {
+      color: #ffd700;
+      background: #1e3c72;
+      padding: 5px 10px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      margin-left: 5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #1e3c72;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    .nav-links a:hover {
+      color: #ffd700;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #ffd700;
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .admission-btn {
+      background: #ffd700;
+      color: #1e3c72 !important;
+      padding: 10px 25px !important;
+      border-radius: 50px;
+      border: 2px solid #ffd700;
+    }
+    .admission-btn:hover {
+      background: #1e3c72 !important;
+      color: #ffd700 !important;
+      border-color: #1e3c72;
+    }
+    .admission-btn::after {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      color: #1e3c72;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* ----- HERO SECTION ----- */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(30, 60, 114, 0.9), rgba(30, 60, 114, 0.7)), 
+                  url('https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: 'AS Web';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20vw;
+      font-weight: 900;
+      color: rgba(255, 215, 0, 0.03);
+      white-space: nowrap;
+      z-index: 0;
+      font-family: 'Playfair Display';
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+    .hero-content h1 {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease;
+      text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+    }
+    .hero-content h1 span {
+      color: #ffd700;
+    }
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s 0.2s both;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      animation: fadeInUp 1s 0.4s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ----- STATS SECTION ----- */
+    .stats {
+      padding: 5rem 0;
+      background: #f0f4f8;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-item {
+      padding: 2rem;
+    }
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #1e3c72;
+      font-family: 'Playfair Display';
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 1.1rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ----- ABOUT SECTION ----- */
+    .about {
+      padding: 6rem 0;
+      background: white;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-content p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+    .about-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .feature i {
+      font-size: 1.8rem;
+      color: #ffd700;
+    }
+    .feature span {
+      font-weight: 600;
+      color: #1e3c72;
+    }
+    .about-image img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 30px 50px -20px rgba(30, 60, 114, 0.5);
+      border: 5px solid #ffd700;
+    }
+
+    /* ----- CLASSES SECTION ----- */
+    .classes {
+      padding: 6rem 0;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+    }
+    .classes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+    .class-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      transition: all 0.4s ease;
+    }
+    .class-card:hover {
+      transform: translateY(-15px);
+      border-color: #ffd700;
+      box-shadow: 0 30px 50px -15px rgba(255, 215, 0, 0.3);
+    }
+    .class-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+      padding-bottom: 1rem;
+    }
+    .class-header h3 {
+      font-size: 1.8rem;
+      color: #ffd700;
+    }
+    .class-header i {
+      font-size: 2.5rem;
+      color: #ffd700;
+    }
+    .class-details {
+      margin: 1rem 0;
+    }
+    .class-details p {
+      margin: 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .class-details i {
+      color: #ffd700;
+      width: 20px;
+    }
+    .class-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 10px 25px;
+      background: #ffd700;
+      color: #1e3c72;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .class-btn:hover {
+      background: white;
+      color: #1e3c72;
+    }
+
+    /* ----- GALLERY SECTION ----- */
+    .gallery {
+      padding: 6rem 0;
+      background: white;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .gallery-item {
+      position: relative;
+      height: 280px;
+      border-radius: 15px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(30, 60, 114, 0.9));
+      color: white;
+      padding: 1.5rem;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+    .gallery-overlay h4 {
+      font-size: 1.5rem;
+      color: #ffd700;
+    }
+
+    /* ----- ADMISSION FORM SECTION ----- */
+    .admission {
+      padding: 6rem 0;
+      background: #f0f4f8;
+    }
+    .admission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .admission-info {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(30, 60, 114, 0.1);
+    }
+    .admission-info h3 {
+      font-size: 2rem;
+      color: #1e3c72;
+      margin-bottom: 1.5rem;
+    }
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 10px;
+    }
+    .info-item i {
+      font-size: 1.5rem;
+      color: #ffd700;
+    }
+    .admission-form {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(30, 60, 114, 0.1);
+      border: 2px solid #1e3c72;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      font-family: 'Montserrat';
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #1e3c72;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: #1e3c72;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .submit-btn:hover {
+      background: #ffd700;
+      color: #1e3c72;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+    }
+
+    /* ----- CONTACT SECTION ----- */
+    .contact {
+      padding: 6rem 0;
+      background: white;
+    }
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .contact-card {
+      text-align: center;
+      padding: 2.5rem;
+      background: #f8f9fa;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    .contact-card:hover {
+      border-color: #1e3c72;
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(30, 60, 114, 0.1);
+    }
+    .contact-card i {
+      font-size: 3rem;
+      color: #ffd700;
+      margin-bottom: 1rem;
+    }
+    .contact-card h3 {
+      font-size: 1.5rem;
+      color: #1e3c72;
+      margin-bottom: 0.5rem;
+    }
+    .contact-card p {
+      color: #666;
+    }
+
+    /* ----- FOOTER ----- */
+    footer {
+      background: #1e3c72;
+      color: white;
+      padding: 3rem 0 2rem;
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .footer-logo i {
+      color: #ffd700;
+    }
+    .footer-links h4 {
+      color: #ffd700;
+      margin-bottom: 1.5rem;
+    }
+    .footer-links ul {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover {
+      color: #ffd700;
+    }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .social-links a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      color: white;
+      transition: all 0.3s ease;
+    }
+    .social-links a:hover {
+      background: #ffd700;
+      color: #1e3c72;
+      transform: translateY(-5px);
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* ----- RESPONSIVE ----- */
+    @media screen and (max-width: 968px) {
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        transition: left 0.5s ease;
+        z-index: 99;
+      }
+      .nav-links.active {
+        left: 0;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .about-grid,
+      .admission-grid,
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        <span>AS Web <span class="highlight">SCHOOL</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#classes">Classes</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#admission" class="admission-btn">Admission</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1 data-aos="fade-up" data-aos-duration="1500">WELCOME TO <span>AS Web</span></h1>
+        <p data-aos="fade-up" data-aos-delay="100" data-aos-duration="1500">Where Excellence Meets Opportunity - Nurturing Tomorrow's Leaders Since 1985</p>
+        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="200">
+          <a href="#about" class="btn">Discover More</a>
+          <a href="#admission" class="btn btn-gold">Apply Now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item" data-aos="fade-up">
+            <div class="stat-number">35+</div>
+            <div class="stat-label">Years of Excellence</div>
+          </div>
+          <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="stat-number">2,500+</div>
+            <div class="stat-label">Students</div>
+          </div>
+          <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="stat-number">98%</div>
+            <div class="stat-label">Graduation Rate</div>
+          </div>
+          <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="stat-number">150+</div>
+            <div class="stat-label">Expert Teachers</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-content" data-aos="fade-right">
+            <h2 class="section-title">About AS Web School</h2>
+            <p>Founded in 1985, AS Web School of Excellence has been a beacon of quality education, combining traditional values with modern teaching methodologies. Our mission is to nurture well-rounded individuals who excel academically, socially, and emotionally.</p>
+            <p>We believe every child is unique and deserves an environment that fosters curiosity, creativity, and critical thinking. Our state-of-the-art campus, experienced faculty, and comprehensive curriculum ensure that students are prepared for the challenges of tomorrow.</p>
+            
+            <div class="about-features">
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>CBSE Curriculum</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Smart Classrooms</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Sports Excellence</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>STEM Lab</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Performing Arts</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-check-circle"></i>
+                <span>Language Lab</span>
+              </div>
+            </div>
+            
+            <a href="#admission" class="btn">Enroll Today</a>
+          </div>
+          <div class="about-image" data-aos="fade-left">
+            <img src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="School Campus">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLASSES SECTION -->
+    <section id="classes" class="classes">
+      <div class="container">
+        <h2 class="section-title light" data-aos="fade-right">Academic Classes</h2>
+        <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; margin-bottom: 2rem;" data-aos="fade-right" data-aos-delay="100">Comprehensive education from Kindergarten to Grade 12</p>
+        
+        <div class="classes-grid">
+          <!-- Pre-Primary -->
+          <div class="class-card" data-aos="flip-left" data-aos-delay="100">
+            <div class="class-header">
+              <h3>Pre-Primary</h3>
+              <i class="fas fa-child"></i>
+            </div>
+            <div class="class-details">
+              <p><i class="fas fa-users"></i> Ages 3-5 Years</p>
+              <p><i class="fas fa-book"></i> Playway & Montessori</p>
+              <p><i class="fas fa-clock"></i> 8:30 AM - 12:30 PM</p>
+              <p><i class="fas fa-apple-alt"></i> Activity-Based Learning</p>
+            </div>
+            <a href="#admission" class="class-btn">Apply Now</a>
+          </div>
+
+          <!-- Primary -->
+          <div class="class-card" data-aos="flip-left" data-aos-delay="200">
+            <div class="class-header">
+              <h3>Primary (I-V)</h3>
+              <i class="fas fa-pencil-alt"></i>
+            </div>
+            <div class="class-details">
+              <p><i class="fas fa-users"></i> Grades 1-5</p>
+              <p><i class="fas fa-book"></i> Integrated Curriculum</p>
+              <p><i class="fas fa-laptop"></i> Smart Classes</p>
+              <p><i class="fas fa-music"></i> Co-curricular Activities</p>
+            </div>
+            <a href="#admission" class="class-btn">Apply Now</a>
+          </div>
+
+          <!-- Middle School -->
+          <div class="class-card" data-aos="flip-left" data-aos-delay="300">
+            <div class="class-header">
+              <h3>Middle (VI-VIII)</h3>
+              <i class="fas fa-flask"></i>
+            </div>
+            <div class="class-details">
+              <p><i class="fas fa-users"></i> Grades 6-8</p>
+              <p><i class="fas fa-flask"></i> STEM Focus</p>
+              <p><i class="fas fa-robot"></i> Robotics Lab</p>
+              <p><i class="fas fa-globe"></i> Language Electives</p>
+            </div>
+            <a href="#admission" class="class-btn">Apply Now</a>
+          </div>
+
+          <!-- Secondary -->
+          <div class="class-card" data-aos="flip-left" data-aos-delay="400">
+            <div class="class-header">
+              <h3>Secondary (IX-X)</h3>
+              <i class="fas fa-calculator"></i>
+            </div>
+            <div class="class-details">
+              <p><i class="fas fa-users"></i> Grades 9-10</p>
+              <p><i class="fas fa-book"></i> CBSE Board Prep</p>
+              <p><i class="fas fa-chart-line"></i> Career Counseling</p>
+              <p><i class="fas fa-trophy"></i> Olympiad Training</p>
+            </div>
+            <a href="#admission" class="class-btn">Apply Now</a>
+          </div>
+
+          <!-- Senior Secondary - Science -->
+          <div class="class-card" data-aos="flip-left" data-aos-delay="500">
+            <div class="class-header">
+              <h3>Science (XI-XII)</h3>
+              <i class="fas fa-microscope"></i>
+            </div>
+            <div class="class-details">
+              <p><i class="fas fa-flask"></i> PCM / PCB</p>
+              <p><i class="fas fa-laptop-code"></i> Computer Science</p>
+              <p><i class="fas fa-dna"></i> Biotechnology</p>
+              <p><i class="fas fa-university"></i> JEE/NEET Prep</p>
+            </div>
+            <a href="#admission" class="class-btn">Apply Now</a>
+          </div>
+
+          <!-- Senior Secondary - Commerce -->
+          <div class="class-card" data-aos="flip-left" data-aos-delay="600">
+            <div class="class-header">
+              <h3>Commerce (XI-XII)</h3>
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="class-details">
+              <p><i class="fas fa-calculator"></i> Accountancy</p>
+              <p><i class="fas fa-chart-bar"></i> Business Studies</p>
+              <p><i class="fas fa-coins"></i> Economics</p>
+              <p><i class="fas fa-file-invoice"></i> CA Foundation Prep</p>
+            </div>
+            <a href="#admission" class="class-btn">Apply Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="gallery">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-right">Campus Gallery</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem;" data-aos="fade-right" data-aos-delay="100">A glimpse into life at AS Web School</p>
+        
+        <div class="gallery-grid">
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+            <img src="https://images.pexels.com/photos/4261099/pexels-photo-4261099.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Smart Classroom">
+            <div class="gallery-overlay">
+              <h4>Smart Classroom</h4>
+              <p>Digital learning environment</p>
+            </div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+            <img src="https://images.pexels.com/photos/8613073/pexels-photo-8613073.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Science Lab">
+            <div class="gallery-overlay">
+              <h4>Science Laboratory</h4>
+              <p>Hands-on experiments</p>
+            </div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+            <img src="https://images.pexels.com/photos/1407427/pexels-photo-1407427.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Library">
+            <div class="gallery-overlay">
+              <h4>Central Library</h4>
+              <p>10,000+ books</p>
+            </div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+            <img src="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Sports Ground">
+            <div class="gallery-overlay">
+              <h4>Sports Complex</h4>
+              <p>Football, cricket & athletics</p>
+            </div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="500">
+            <img src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Campus">
+            <div class="gallery-overlay">
+              <h4>Campus View</h4>
+              <p>10 acre green campus</p>
+            </div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="600">
+            <img src="https://images.pexels.com/photos/3769980/pexels-photo-3769980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Computer Lab">
+            <div class="gallery-overlay">
+              <h4>Computer Lab</h4>
+              <p>Latest technology</p>
+            </div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="700">
+            <img src="https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Art Room">
+            <div class="gallery-overlay">
+              <h4>Art & Craft Room</h4>
+              <p>Creative expression</p>
+            </div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="800">
+            <img src="https://images.pexels.com/photos/4207754/pexels-photo-4207754.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Music Room">
+            <div class="gallery-overlay">
+              <h4>Music Academy</h4>
+              <p>Vocal & instrumental</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMISSION SECTION -->
+    <section id="admission" class="admission">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-right">Admission Open 2025-26</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem;" data-aos="fade-right" data-aos-delay="100">Limited seats available for all grades</p>
+        
+        <div class="admission-grid">
+          <div class="admission-info" data-aos="fade-right">
+            <h3>Why Choose AS Web?</h3>
+            <div class="info-item">
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>Holistic Development</strong>
+                <p>Academic excellence with sports & arts</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>Expert Faculty</strong>
+                <p>150+ qualified teachers</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>Modern Infrastructure</strong>
+                <p>Smart classes, labs, sports complex</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>Transport Facility</strong>
+                <p>50+ buses covering all routes</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-check-circle"></i>
+              <div>
+                <strong>Scholarships</strong>
+                <p>Merit-based scholarships available</p>
+              </div>
+            </div>
+            
+            <div style="margin-top: 2rem; background: #1e3c72; color: white; padding: 2rem; border-radius: 15px;">
+              <h4 style="color: #ffd700; margin-bottom: 1rem;">Important Dates</h4>
+              <p><i class="fas fa-calendar" style="color: #ffd700;"></i> Application Deadline: March 31, 2025</p>
+              <p><i class="fas fa-calendar-check" style="color: #ffd700;"></i> Entrance Test: April 15, 2025</p>
+              <p><i class="fas fa-calendar-alt" style="color: #ffd700;"></i> Session Begins: June 1, 2025</p>
+            </div>
+          </div>
+          
+          <div class="admission-form" data-aos="fade-left">
+            <h3 style="color: #1e3c72; margin-bottom: 2rem;">Application Form</h3>
+            <form id="admissionForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <input type="text" placeholder="First Name *" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" placeholder="Last Name *" required>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <input type="date" placeholder="Date of Birth *" required>
+                </div>
+                <div class="form-group">
+                  <select required>
+                    <option value="">Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <select required>
+                  <option value="">Select Class Applying For *</option>
+                  <option>Pre-Primary (Nursery, LKG, UKG)</option>
+                  <option>Class I</option>
+                  <option>Class II</option>
+                  <option>Class III</option>
+                  <option>Class IV</option>
+                  <option>Class V</option>
+                  <option>Class VI</option>
+                  <option>Class VII</option>
+                  <option>Class VIII</option>
+                  <option>Class IX</option>
+                  <option>Class X</option>
+                  <option>Class XI (Science)</option>
+                  <option>Class XI (Commerce)</option>
+                </select>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <input type="email" placeholder="Email *" required>
+                </div>
+                <div class="form-group">
+                  <input type="tel" placeholder="Phone Number *" required>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <textarea rows="3" placeholder="Current School (if any)"></textarea>
+              </div>
+              
+              <div class="form-group">
+                <textarea rows="3" placeholder="Address *" required></textarea>
+              </div>
+              
+              <button type="submit" class="submit-btn">Submit Application</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-right">Contact Us</h2>
+        
+        <div class="contact-container">
+          <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Address</h3>
+            <p>AS Web School of Excellence<br>123 Education Avenue<br>New Delhi - 110001</p>
+          </div>
+          <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+            <i class="fas fa-phone-alt"></i>
+            <h3>Phone</h3>
+            <p>Admissions: +91 11 2345 6789<br>Office: +91 11 2345 6790<br>Helpline: 1800-123-4567</p>
+          </div>
+          <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+            <i class="fas fa-envelope"></i>
+            <h3>Email</h3>
+            <p>admissions@AS Webschool.edu<br>info@AS Webschool.edu<br>principal@AS Webschool.edu</p>
+          </div>
+        </div>
+        
+        <div style="margin-top: 4rem; text-align: center;" data-aos="fade-up">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.901123456789!2d77.2276!3d28.6129!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM2JzQ2LjQiTiA3N8KwMTMnMzkuNCJF!5e0!3m2!1sen!2sin!4v1234567890123" width="100%" height="450" style="border:0; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div class="footer-logo">
+            <i class="fas fa-graduation-cap"></i> AS Web SCHOOL
+          </div>
+          <p style="margin: 1rem 0; color: rgba(255,255,255,0.7);">Nurturing minds, building character, creating leaders since 1985.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#classes">Academics</a></li>
+            <li><a href="#admission">Admissions</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Academics</h4>
+          <ul>
+            <li><a href="#">Pre-Primary</a></li>
+            <li><a href="#">Primary School</a></li>
+            <li><a href="#">Middle School</a></li>
+            <li><a href="#">Secondary School</a></li>
+            <li><a href="#">Senior Secondary</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Parent Portal</a></li>
+            <li><a href="#">Student Login</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Alumni</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2025 AS Web School of Excellence. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ffd700;"></i> for education</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 1200,
+      once: false,
+      mirror: true,
+      offset: 100,
+      easing: 'ease-in-out'
+    });
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const icon = menuToggle.querySelector('i');
+      if (navLinks.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Close mobile menu
+        navLinks.classList.remove('active');
+        const icon = menuToggle.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+        
+        const targetId = link.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Form submission
+    const admissionForm = document.getElementById('admissionForm');
+    if (admissionForm) {
+      admissionForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you for applying to AS Web School! Our admissions team will contact you within 48 hours to schedule an interaction.');
+        admissionForm.reset();
+      });
+    }
+
+    // Active link highlighting on scroll
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

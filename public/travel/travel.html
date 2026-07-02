@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tour &  Travels | Explore The World</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #ffffff;
+      color: #2d3436;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #00b894, #00cec9);
+      border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #00a884, #00b8b5);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 14px 35px;
+      background: #00b894;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid #00b894;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    .btn:hover {
+      background: transparent;
+      color: #00b894;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 184, 148, 0.3);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+    .btn-outline:hover {
+      background: white;
+      color: #00b894;
+      border-color: white;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif;
+      color: #2d3436;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #00b894, #00cec9);
+      border-radius: 4px;
+    }
+    .section-title.center {
+      display: block;
+      text-align: center;
+    }
+    .section-title.center::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .section-subtitle {
+      text-align: center;
+      color: #636e72;
+      margin-bottom: 3rem;
+      font-size: 1.2rem;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #00b894;
+      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+    }
+    .logo i {
+      font-size: 2.2rem;
+      color: #00cec9;
+    }
+    .logo span {
+      color: #2d3436;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #2d3436;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #00b894;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .nav-icons a {
+      color: #2d3436;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+    .nav-icons a:hover {
+      color: #00b894;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #2d3436;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      padding: 0 2rem;
+    }
+    .hero-content h1 {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif;
+      animation: fadeInUp 1s ease;
+      text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+    }
+    .hero-content h1 span {
+      color: #00b894;
+    }
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s 0.2s both;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      animation: fadeInUp 1s 0.4s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Search Box */
+    .search-box {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+      margin-top: -50px;
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .search-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr) auto;
+      gap: 1rem;
+      align-items: center;
+    }
+    .search-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .search-item label {
+      font-weight: 600;
+      color: #2d3436;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .search-item input,
+    .search-item select {
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.3s ease;
+    }
+    .search-item input:focus,
+    .search-item select:focus {
+      border-color: #00b894;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 184, 148, 0.1);
+    }
+    .search-btn {
+      background: #00b894;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      height: 100%;
+      align-self: flex-end;
+    }
+    .search-btn:hover {
+      background: #00a884;
+      transform: translateY(-2px);
+    }
+
+    /* Destinations Section */
+    .destinations {
+      padding: 6rem 0;
+    }
+    .destinations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+    .destination-card {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+    .destination-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 30px 60px rgba(0, 184, 148, 0.2);
+    }
+    .destination-image {
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+    .destination-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .destination-card:hover .destination-image img {
+      transform: scale(1.1);
+    }
+    .destination-overlay {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #00b894;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      z-index: 2;
+    }
+    .destination-info {
+      padding: 2rem;
+      background: white;
+    }
+    .destination-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #2d3436;
+    }
+    .destination-location {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #636e72;
+      margin-bottom: 1rem;
+    }
+    .destination-location i {
+      color: #00b894;
+    }
+    .destination-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #00b894;
+      margin: 1rem 0;
+    }
+    .destination-rating {
+      color: #fdcb6e;
+      margin-bottom: 1rem;
+    }
+    .destination-rating span {
+      color: #636e72;
+      margin-left: 0.5rem;
+    }
+    .destination-features {
+      display: flex;
+      gap: 1rem;
+      margin: 1rem 0;
+      color: #636e72;
+    }
+    .destination-features i {
+      color: #00b894;
+      margin-right: 5px;
+    }
+
+    /* Packages Section */
+    .packages {
+      padding: 6rem 0;
+      background: linear-gradient(135deg, #f5f7fa 0%, #f0f2f5 100%);
+    }
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .package-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+    }
+    .package-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0, 184, 148, 0.2);
+    }
+    .package-header {
+      background: linear-gradient(135deg, #00b894, #00cec9);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    .package-header h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .package-price {
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+    .package-price span {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+    .package-body {
+      padding: 2rem;
+    }
+    .package-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    .package-features li {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .package-features i {
+      color: #00b894;
+    }
+    .package-btn {
+      width: 100%;
+      padding: 12px;
+      background: #00b894;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .package-btn:hover {
+      background: #00a884;
+      transform: translateY(-2px);
+    }
+
+    /* Why Choose Us */
+    .features {
+      padding: 6rem 0;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+    .feature-card {
+      text-align: center;
+      padding: 2.5rem;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+      transition: all 0.4s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0, 184, 148, 0.1);
+    }
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #00b894, #00cec9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .feature-icon i {
+      font-size: 2rem;
+      color: white;
+    }
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .feature-card p {
+      color: #636e72;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 6rem 0;
+      background: linear-gradient(135deg, #00b894, #00cec9);
+      color: white;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 20px;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      border-color: white;
+    }
+    .testimonial-content {
+      font-size: 1.1rem;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .testimonial-author img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+    }
+    .author-info h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+    }
+    .author-info p {
+      opacity: 0.8;
+    }
+
+    /* Gallery */
+    .gallery {
+      padding: 6rem 0;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .gallery-item {
+      position: relative;
+      height: 300px;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 184, 148, 0.9));
+      color: white;
+      padding: 2rem;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+    .gallery-overlay h4 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 6rem 0;
+      background: #f5f7fa;
+    }
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+    }
+    .contact-info {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .contact-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #00b894, #00cec9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-icon i {
+      font-size: 1.5rem;
+      color: white;
+    }
+    .contact-text h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+    .contact-form {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.3s ease;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: #00b894;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 184, 148, 0.1);
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: #00b894;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+    }
+    .submit-btn:hover {
+      background: #00a884;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 184, 148, 0.3);
+    }
+
+    /* Newsletter */
+    .newsletter {
+      padding: 4rem 0;
+      background: linear-gradient(135deg, #2d3436, #636e72);
+      color: white;
+      text-align: center;
+    }
+    .newsletter h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif;
+    }
+    .newsletter p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    .newsletter-form {
+      display: flex;
+      max-width: 600px;
+      margin: 0 auto;
+      gap: 1rem;
+    }
+    .newsletter-form input {
+      flex: 1;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      outline: none;
+    }
+    .newsletter-form button {
+      padding: 15px 40px;
+      background: #00b894;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .newsletter-form button:hover {
+      background: #00a884;
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background: #2d3436;
+      color: white;
+      padding: 4rem 0 2rem;
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: #00b894;
+    }
+    .footer-logo i {
+      color: #00cec9;
+    }
+    .footer-desc {
+      color: #b2bec3;
+      margin: 1rem 0;
+    }
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+    .footer-social a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      color: white;
+      transition: all 0.3s ease;
+    }
+    .footer-social a:hover {
+      background: #00b894;
+      transform: translateY(-5px);
+    }
+    .footer-links h4 {
+      margin-bottom: 1.5rem;
+      color: #00b894;
+    }
+    .footer-links ul {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+    .footer-links a {
+      color: #b2bec3;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover {
+      color: #00b894;
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #b2bec3;
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 968px) {
+      .nav-links {
+        display: none;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+      .search-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      .newsletter-form {
+        flex-direction: column;
+        padding: 0 2rem;
+      }
+    }
+  </style>
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <a href="#" class="logo" onclick="showPage('home'); return false;">
+        <i class="fas fa-globe-asia"></i>
+        <span>Tour & </span> TRAVELS
+      </a>
+      
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-icons">
+        <a href="#"><i class="fas fa-search"></i></a>
+        <a href="#"><i class="fas fa-user"></i></a>
+        <a href="#"><i class="fas fa-heart"></i></a>
+        <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 data-aos="fade-up">Explore The <span>World</span> With Us</h1>
+      <p data-aos="fade-up" data-aos-delay="100">Discover amazing places at exclusive deals</p>
+      <div class="hero-buttons" data-aos="fade-up" data-aos-delay="200">
+        <a href="#destinations" class="btn">Explore Now</a>
+        <a href="#contact" class="btn btn-outline">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Box -->
+  <div class="container">
+    <div class="search-box" data-aos="fade-up" data-aos-delay="300">
+      <div class="search-grid">
+        <div class="search-item">
+          <label><i class="fas fa-map-marker-alt"></i> Destination</label>
+          <select>
+            <option>Where are you going?</option>
+            <option>Bali, Indonesia</option>
+            <option>Paris, France</option>
+            <option>Switzerland</option>
+            <option>Maldives</option>
+            <option>Dubai, UAE</option>
+          </select>
+        </div>
+        <div class="search-item">
+          <label><i class="fas fa-calendar"></i> Check In</label>
+          <input type="date">
+        </div>
+        <div class="search-item">
+          <label><i class="fas fa-calendar-check"></i> Check Out</label>
+          <input type="date">
+        </div>
+        <div class="search-item">
+          <label><i class="fas fa-users"></i> Travelers</label>
+          <select>
+            <option>1 Traveler</option>
+            <option>2 Travelers</option>
+            <option>3 Travelers</option>
+            <option>4+ Travelers</option>
+          </select>
+        </div>
+        <button class="search-btn" onclick="searchDestinations()">Search</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Destinations Section -->
+  <section id="destinations" class="destinations">
+    <div class="container">
+      <h2 class="section-title center" data-aos="fade-up">Popular Destinations</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Most loved places by our travelers</p>
+      
+      <div class="destinations-grid">
+        <!-- Destination 1 -->
+        <div class="destination-card" data-aos="flip-left" data-aos-delay="100">
+          <div class="destination-image">
+            <img src="https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Bali">
+            <div class="destination-overlay">Popular</div>
+          </div>
+          <div class="destination-info">
+            <h3>Bali, Indonesia</h3>
+            <div class="destination-location">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>South East Asia</span>
+            </div>
+            <div class="destination-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span>(4.8/5)</span>
+            </div>
+            <div class="destination-features">
+              <span><i class="fas fa-umbrella-beach"></i> Beach</span>
+              <span><i class="fas fa-hotel"></i> Resort</span>
+              <span><i class="fas fa-utensils"></i> Food</span>
+            </div>
+            <div class="destination-price">$799 <span style="font-size: 1rem; color: #636e72;">/person</span></div>
+            <a href="#contact" class="btn" style="padding: 10px 25px;">Book Now</a>
+          </div>
+        </div>
+
+        <!-- Destination 2 -->
+        <div class="destination-card" data-aos="flip-left" data-aos-delay="200">
+          <div class="destination-image">
+            <img src="https://images.pexels.com/photos/699466/pexels-photo-699466.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Switzerland">
+            <div class="destination-overlay">Trending</div>
+          </div>
+          <div class="destination-info">
+            <h3>Swiss Alps</h3>
+            <div class="destination-location">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Switzerland</span>
+            </div>
+            <div class="destination-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <span>(5.0/5)</span>
+            </div>
+            <div class="destination-features">
+              <span><i class="fas fa-skiing"></i> Skiing</span>
+              <span><i class="fas fa-mountain"></i> Mountain</span>
+              <span><i class="fas fa-train"></i> Transport</span>
+            </div>
+            <div class="destination-price">$1,299 <span style="font-size: 1rem; color: #636e72;">/person</span></div>
+            <a href="#contact" class="btn" style="padding: 10px 25px;">Book Now</a>
+          </div>
+        </div>
+
+        <!-- Destination 3 -->
+        <div class="destination-card" data-aos="flip-left" data-aos-delay="300">
+          <div class="destination-image">
+            <img src="https://images.pexels.com/photos/161901/paris-france-eiffel-tower-161901.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Paris">
+            <div class="destination-overlay">Special</div>
+          </div>
+          <div class="destination-info">
+            <h3>Paris, France</h3>
+            <div class="destination-location">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Europe</span>
+            </div>
+            <div class="destination-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span>(4.7/5)</span>
+            </div>
+            <div class="destination-features">
+              <span><i class="fas fa-landmark"></i> Culture</span>
+              <span><i class="fas fa-wine-glass-alt"></i> Wine</span>
+              <span><i class="fas fa-camera"></i> Tour</span>
+            </div>
+            <div class="destination-price">$899 <span style="font-size: 1rem; color: #636e72;">/person</span></div>
+            <a href="#contact" class="btn" style="padding: 10px 25px;">Book Now</a>
+          </div>
+        </div>
+
+        <!-- Destination 4 -->
+        <div class="destination-card" data-aos="flip-left" data-aos-delay="400">
+          <div class="destination-image">
+            <img src="https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Maldives">
+            <div class="destination-overlay">Luxury</div>
+          </div>
+          <div class="destination-info">
+            <h3>Maldives</h3>
+            <div class="destination-location">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Indian Ocean</span>
+            </div>
+            <div class="destination-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <span>(5.0/5)</span>
+            </div>
+            <div class="destination-features">
+              <span><i class="fas fa-water"></i> Water Villa</span>
+              <span><i class="fas fa-ship"></i> Cruise</span>
+              <span><i class="fas fa-diving"></i> Diving</span>
+            </div>
+            <div class="destination-price">$1,599 <span style="font-size: 1rem; color: #636e72;">/person</span></div>
+            <a href="#contact" class="btn" style="padding: 10px 25px;">Book Now</a>
+          </div>
+        </div>
+
+        <!-- Destination 5 -->
+        <div class="destination-card" data-aos="flip-left" data-aos-delay="500">
+          <div class="destination-image">
+            <img src="https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Dubai">
+            <div class="destination-overlay">Hot Deal</div>
+          </div>
+          <div class="destination-info">
+            <h3>Dubai, UAE</h3>
+            <div class="destination-location">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Middle East</span>
+            </div>
+            <div class="destination-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <span>(4.9/5)</span>
+            </div>
+            <div class="destination-features">
+              <span><i class="fas fa-city"></i> City Tour</span>
+              <span><i class="fas fa-shopping-bag"></i> Shopping</span>
+              <span><i class="fas fa-desert"></i> Safari</span>
+            </div>
+            <div class="destination-price">$699 <span style="font-size: 1rem; color: #636e72;">/person</span></div>
+            <a href="#contact" class="btn" style="padding: 10px 25px;">Book Now</a>
+          </div>
+        </div>
+
+        <!-- Destination 6 -->
+        <div class="destination-card" data-aos="flip-left" data-aos-delay="600">
+          <div class="destination-image">
+            <img src="https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Greece">
+            <div class="destination-overlay">Romantic</div>
+          </div>
+          <div class="destination-info">
+            <h3>Santorini, Greece</h3>
+            <div class="destination-location">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Mediterranean</span>
+            </div>
+            <div class="destination-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span>(4.8/5)</span>
+            </div>
+            <div class="destination-features">
+              <span><i class="fas fa-sun"></i> Sunset</span>
+              <span><i class="fas fa-swimmer"></i> Beach</span>
+              <span><i class="fas fa-wine-glass-alt"></i> Wine</span>
+            </div>
+            <div class="destination-price">$999 <span style="font-size: 1rem; color: #636e72;">/person</span></div>
+            <a href="#contact" class="btn" style="padding: 10px 25px;">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages Section -->
+  <section id="packages" class="packages">
+    <div class="container">
+      <h2 class="section-title center" data-aos="fade-up">Travel Packages</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Choose the perfect plan for your journey</p>
+      
+      <div class="packages-grid">
+        <!-- Basic Package -->
+        <div class="package-card" data-aos="zoom-in" data-aos-delay="100">
+          <div class="package-header">
+            <h3>Basic Explorer</h3>
+            <div class="package-price">$299 <span>/person</span></div>
+          </div>
+          <div class="package-body">
+            <ul class="package-features">
+              <li><i class="fas fa-check"></i> 3 Days, 2 Nights</li>
+              <li><i class="fas fa-check"></i> Basic Accommodation</li>
+              <li><i class="fas fa-check"></i> Breakfast Included</li>
+              <li><i class="fas fa-check"></i> City Tour</li>
+              <li><i class="fas fa-times" style="color: #ff7675;"></i> Flight Tickets</li>
+              <li><i class="fas fa-times" style="color: #ff7675;"></i> Guide Service</li>
+            </ul>
+            <button class="package-btn" onclick="bookPackage('Basic Explorer')">Book Now</button>
+          </div>
+        </div>
+
+        <!-- Standard Package -->
+        <div class="package-card" data-aos="zoom-in" data-aos-delay="200">
+          <div class="package-header" style="background: linear-gradient(135deg, #00a884, #00b894);">
+            <h3>Standard Traveler</h3>
+            <div class="package-price">$599 <span>/person</span></div>
+          </div>
+          <div class="package-body">
+            <ul class="package-features">
+              <li><i class="fas fa-check"></i> 5 Days, 4 Nights</li>
+              <li><i class="fas fa-check"></i> 3★ Hotel</li>
+              <li><i class="fas fa-check"></i> All Meals Included</li>
+              <li><i class="fas fa-check"></i> City Tour + Museum</li>
+              <li><i class="fas fa-check"></i> Flight Tickets</li>
+              <li><i class="fas fa-times" style="color: #ff7675;"></i> Guide Service</li>
+            </ul>
+            <button class="package-btn" onclick="bookPackage('Standard Traveler')">Book Now</button>
+          </div>
+        </div>
+
+        <!-- Premium Package -->
+        <div class="package-card" data-aos="zoom-in" data-aos-delay="300">
+          <div class="package-header" style="background: linear-gradient(135deg, #00cec9, #00b894);">
+            <h3>Premium Explorer</h3>
+            <div class="package-price">$999 <span>/person</span></div>
+          </div>
+          <div class="package-body">
+            <ul class="package-features">
+              <li><i class="fas fa-check"></i> 7 Days, 6 Nights</li>
+              <li><i class="fas fa-check"></i> 5★ Luxury Hotel</li>
+              <li><i class="fas fa-check"></i> All Meals + Drinks</li>
+              <li><i class="fas fa-check"></i> Private City Tour</li>
+              <li><i class="fas fa-check"></i> Flight Tickets</li>
+              <li><i class="fas fa-check"></i> Personal Guide</li>
+            </ul>
+            <button class="package-btn" onclick="bookPackage('Premium Explorer')">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title center" data-aos="fade-up">Why Choose Tour &  Travels?</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">We make your journey memorable</p>
+      
+      <div class="features-grid">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-icon">
+            <i class="fas fa-medal"></i>
+          </div>
+          <h3>Best Price Guarantee</h3>
+          <p>We offer the best prices with price match guarantee</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="feature-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3>24/7 Support</h3>
+          <p>Round the clock customer support for your peace of mind</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Safe Travels</h3>
+          <p>Your safety is our top priority with insured packages</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="feature-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3>Happy Customers</h3>
+          <p>Thousands of satisfied travelers worldwide</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title center" style="color: white;" data-aos="fade-up">What Our Travelers Say</h2>
+      <p class="section-subtitle" style="color: rgba(255,255,255,0.8);" data-aos="fade-up" data-aos-delay="100">Real experiences from real travelers</p>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="testimonial-content">
+            "Amazing experience with Tour &  Travels! The trip to Bali was perfectly organized. Hotels were excellent and the guide was very knowledgeable."
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Sarah Johnson">
+            <div class="author-info">
+              <h4>Sarah Johnson</h4>
+              <p>Traveled to Bali</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="testimonial-content">
+            "Best travel agency I've ever used. They took care of everything from flights to accommodations. Highly recommend the Switzerland package!"
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Michael Chen">
+            <div class="author-info">
+              <h4>Michael Chen</h4>
+              <p>Traveled to Switzerland</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="testimonial-content">
+            "Our honeymoon in Maldives was magical thanks to Tour &  Travels. The water villa, the food, everything was perfect. Will book again!"
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Priya & Rahul">
+            <div class="author-info">
+              <h4>Priya & Rahul</h4>
+              <p>Traveled to Maldives</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery">
+    <div class="container">
+      <h2 class="section-title center" data-aos="fade-up">Travel Gallery</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Moments captured by our travelers</p>
+      
+      <div class="gallery-grid">
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+          <img src="https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Gallery 1">
+          <div class="gallery-overlay">
+            <h4>Bali, Indonesia</h4>
+            <p>Paradise on Earth</p>
+          </div>
+        </div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+          <img src="https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Gallery 2">
+          <div class="gallery-overlay">
+            <h4>Maldives</h4>
+            <p>Crystal Clear Waters</p>
+          </div>
+        </div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+          <img src="https://images.pexels.com/photos/161901/paris-france-eiffel-tower-161901.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Gallery 3">
+          <div class="gallery-overlay">
+            <h4>Paris, France</h4>
+            <p>City of Love</p>
+          </div>
+        </div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+          <img src="https://images.pexels.com/photos/699466/pexels-photo-699466.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Gallery 4">
+          <div class="gallery-overlay">
+            <h4>Swiss Alps</h4>
+            <p>Winter Wonderland</p>
+          </div>
+        </div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="500">
+          <img src="https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Gallery 5">
+          <div class="gallery-overlay">
+            <h4>Dubai, UAE</h4>
+            <p>Modern Marvel</p>
+          </div>
+        </div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="600">
+          <img src="https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Gallery 6">
+          <div class="gallery-overlay">
+            <h4>Santorini, Greece</h4>
+            <p>Blue & White Magic</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2 class="section-title center" data-aos="fade-up">Contact Us</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Get in touch for your dream vacation</p>
+      
+      <div class="contact-container">
+        <div class="contact-info" data-aos="fade-right">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-text">
+              <h4>Visit Us</h4>
+              <p>123 Travel Street, New Delhi - 110001</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-text">
+              <h4>Call Us</h4>
+              <p>+91 11 2345 6789</p>
+              <p>+91 98 7654 3210</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-text">
+              <h4>Email Us</h4>
+              <p>info@Tour & travels.com</p>
+              <p>bookings@Tour & travels.com</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-text">
+              <h4>Working Hours</h4>
+              <p>Mon-Sat: 9:00 AM - 8:00 PM</p>
+              <p>Sunday: 10:00 AM - 4:00 PM</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-form" data-aos="fade-left">
+          <form onsubmit="handleContact(event)">
+            <div class="form-group">
+              <input type="text" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+              <input type="tel" placeholder="Phone Number">
+            </div>
+            <div class="form-group">
+              <select>
+                <option>Select Destination</option>
+                <option>Bali, Indonesia</option>
+                <option>Switzerland</option>
+                <option>Paris, France</option>
+                <option>Maldives</option>
+                <option>Dubai, UAE</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <textarea rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="container">
+      <h2 data-aos="fade-up">Subscribe to Our Newsletter</h2>
+      <p data-aos="fade-up" data-aos-delay="100">Get travel inspiration and exclusive offers in your inbox</p>
+      <form class="newsletter-form" data-aos="fade-up" data-aos-delay="200" onsubmit="subscribeNewsletter(event)">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div class="footer-logo">
+            <i class="fas fa-globe-asia"></i> Tour &  TRAVELS
+          </div>
+          <p class="footer-desc">Making your travel dreams come true since 2010. We specialize in creating unforgettable travel experiences.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#packages">Packages</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Destinations</h4>
+          <ul>
+            <li><a href="#">Bali, Indonesia</a></li>
+            <li><a href="#">Swiss Alps</a></li>
+            <li><a href="#">Paris, France</a></li>
+            <li><a href="#">Maldives</a></li>
+            <li><a href="#">Dubai, UAE</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Cancellation Policy</a></li>
+            <li><a href="#">Payment Options</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Tour &  Travels. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #00b894;"></i> for travelers</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 1200,
+      once: false,
+      mirror: true,
+      offset: 100,
+      easing: 'ease-in-out'
+    });
+
+    // Mobile Menu Toggle
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+
+        // Close mobile menu
+        if (window.innerWidth <= 968) {
+          document.getElementById('navLinks').style.display = 'none';
+        }
+      });
+    });
+
+    // Search function
+    function searchDestinations() {
+      alert('Search functionality will be implemented with backend. For now, please browse our destinations!');
+    }
+
+    // Book package
+    function bookPackage(packageName) {
+      alert(`Thank you for your interest in ${packageName}! Our team will contact you shortly to complete your booking.`);
+    }
+
+    // Handle contact form
+    function handleContact(event) {
+      event.preventDefault();
+      alert('Thank you for contacting us! Our travel expert will get back to you within 24 hours.');
+      event.target.reset();
+    }
+
+    // Handle newsletter subscription
+    function subscribeNewsletter(event) {
+      event.preventDefault();
+      alert('Thank you for subscribing to our newsletter! You will receive travel updates and exclusive offers.');
+      event.target.reset();
+    }
+
+    // Active link highlighting on scroll
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 968) {
+        document.getElementById('navLinks').style.display = 'flex';
+      } else {
+        document.getElementById('navLinks').style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

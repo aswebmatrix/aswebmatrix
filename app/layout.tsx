@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import "aos/dist/aos.css";
-import Header from "@/app/components/Header/page";
-import Footer from "@/app/components/Footer/page";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Script from "next/script";
 
@@ -22,7 +20,7 @@ export const metadata: Metadata = {
   },
   description: "A.S Web Matrix is India's leading digital agency providing SEO Services, Website Development, WordPress Development, MERN Stack Development, Digital Marketing, E-commerce Solutions, Mobile App Development, PPC Services, Social Media Marketing & Content Writing. Serving Delhi NCR, Mumbai, Bangalore & International clients.",
   keywords: "SEO Company India, Website Development Company, WordPress Development India, MERN Stack Development, Digital Marketing Agency, E-commerce Development, Mobile App Development, PPC Services India, Social Media Marketing, Content Writing Services, Best SEO Company Delhi, Web Development Mumbai, WordPress Expert Bangalore, Digital Marketing Noida, E-commerce Solutions Gurugram, App Development Faridabad",
-  
+
   openGraph: {
     title: "A.S Web Matrix - Complete Digital Solutions Agency",
     description: "Expert SEO, Web Development, WordPress, MERN Stack, Digital Marketing & More. Serving India & International clients.",
@@ -55,29 +53,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link 
-          rel="stylesheet" 
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
-        
+
         <link rel="canonical" href="https://www.aswebmatrix.com" />
         <meta name="geo.region" content="IN" />
         <meta name="geo.placename" content="Faridabad, Delhi NCR" />
       </head>
       <body className={`${poppins.variable} antialiased`}>
-        <Header />
         {children}
-        <Footer />
-        
+
         {/* ============================================ */}
         {/* SCHEMA SCRIPTS - For SEO */}
         {/* ============================================ */}
-        
-        {/* Main Organization Schema */}
+
         <Script
           id="schema-organization"
           type="application/ld+json"
@@ -113,7 +108,6 @@ export default function RootLayout({
           }}
         />
 
-        {/* Service List Schema */}
         <Script
           id="schema-services"
           type="application/ld+json"

@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import connectDB from "@/lib/mongodb";
 import City from "@/models/City";
+import Script from "next/script";
 
 export async function generateMetadata({ params }) {
   const { city } = await params;
@@ -30,7 +31,8 @@ export default async function CityServicePage({ params }) {
   const data = await City.findOneAndUpdate(
     { slug: city, status: "active" },
     { $inc: { views: 1 } },
-    { new: true }
+  
+    { returnDocument: "after" }
   ).lean();
 
   if (!data) notFound();

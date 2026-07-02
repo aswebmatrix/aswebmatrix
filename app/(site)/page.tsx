@@ -3,8 +3,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import './globals.css';
-import ConsultationPopup from './components/ConsultationPopup';
+import '@/app/globals.css';
+import ConsultationPopup from '@/app/components/ConsultationPopup';
 import { motion } from 'framer-motion';
 import { 
   FaStar, FaStarHalfAlt, FaRegStar, 

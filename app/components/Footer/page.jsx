@@ -114,6 +114,11 @@ const Footer = () => {
                   <i className="fas fa-chevron-right"></i> Contact
                 </Link>
               </li>
+                            <li>
+              <Link href="/blog">
+               <i className="fas fa-chevron-right"></i> Blog
+              </Link>
+            </li>
             </ul>
           </div>
 
@@ -151,6 +156,7 @@ const Footer = () => {
                   <i className="fas fa-chevron-right"></i> Digital Marketing
                 </Link>
               </li>
+
             </ul>
           </div>
 

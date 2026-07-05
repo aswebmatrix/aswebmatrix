@@ -105,11 +105,8 @@ const Header = () => {
                 Contact
               </Link>
             </li>
-            <li>
-              <Link href="/blog" className={pathname === '/blog' ? 'active' : ''} onClick={closeMenu}>
-                Blog
-              </Link>
-            </li>
+            
+            
           </ul>
         </nav>
       </div>

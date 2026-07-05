@@ -4,9 +4,7 @@
    navbar and the rest of the site read as one consistent product, not two
    separate templates stitched together.
 ============================================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap");
 :root {
   --hm-ink: #0a1f1c;
   --hm-ink-soft: #102b26;
@@ -16,8 +14,9 @@
   --hm-amber: #f4a261;
   --hm-line: #e3e8e1;
   --hm-white: #ffffff;
-  --hm-font-display: 'Sora', 'Segoe UI', sans-serif;
-  --hm-font-body: 'Inter', 'Segoe UI', sans-serif;
+    --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
 }
 
 * {
@@ -26,12 +25,7 @@
   box-sizing: border-box;
 }
 
-/* ============================================================================
-   HEADER SHELL
-   Transparent over the dark hero on load, solidifies to a clean white bar
-   once the page scrolls past the hero — so it never fights the hero's own
-   background and never looks washed out lower on the page.
-============================================================================ */
+
 
 .header {
   position: fixed;
@@ -45,11 +39,11 @@
 }
 
 .header.scrolled {
-  background: rgba(247, 249, 245, 0.92);
+  background: rgba(255, 255, 255, 1);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--hm-line);
-  box-shadow: 0 8px 24px rgba(10, 31, 28, 0.08);
+  /* box-shadow: 0 8px 24px rgba(10, 31, 28, 0.08); */
 }
 
 .container {

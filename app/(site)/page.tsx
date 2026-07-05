@@ -1,11 +1,13 @@
-// app/page.tsx
-'use client';
 
-import React, { useState } from 'react';
+'use client';
+import Image from "next/image";
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import '@/app/globals.css';
 import ConsultationPopup from '@/app/components/ConsultationPopup';
 import { motion } from 'framer-motion';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { 
   FaStar, FaStarHalfAlt, FaRegStar, 
   FaGoogle, FaExternalLinkAlt, FaGithub,
@@ -18,6 +20,16 @@ import {
 
 const Page = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  // Initialize AOS (Animate On Scroll) once when the page mounts
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 60,
+    });
+  }, []);
   
   // ============================================================================
   // Data Models
@@ -236,8 +248,8 @@ const Page = () => {
               <path className="hero-graph-line" d="M0,180 L60,165 L120,170 L180,130 L240,140 L300,95 L360,105 L420,60 L480,70 L540,30 L600,40" />
             </svg>
           </div>
-          <div className="container">
-            <div className="hero-content">
+          <div className="container hero-inner">
+            <div className="hero-content" data-aos="fade-right" data-aos-duration="900">
               <div className="hero-badge animate-fade-in">
                 <i className="fas fa-star"></i> Trusted by 5+ Businesses
               </div>
@@ -263,13 +275,27 @@ const Page = () => {
                 </a>
               </div>
             </div>
+
+            {/* Product visual — laptop / dashboard mockup */}
+            <div className="hero-visual" data-aos="fade-left" data-aos-duration="900" data-aos-delay="150">
+              <div className="hero-visual-frame">
+                <Image
+                  src="/images/computer (2).png"
+                  alt="AS Web Matrix — websites and digital solutions dashboard mockup"
+                  width={100}
+                  height={100}
+                  className="hero-visual-img"
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Trust Indicators */}
         <section className="trust-section">
           <div className="container">
-            <div className="trust-grid">
+            <div className="trust-grid" data-aos="fade-up">
               <div className="trust-card">
                 <div className="trust-number">5+</div>
                 <div className="trust-label">Projects Completed</div>
@@ -299,7 +325,7 @@ const Page = () => {
         {/* About Section */}
         <section id="about" className="about-section">
           <div className="container">
-            <div className="section-header">
+            <div className="section-header" data-aos="fade-up">
               <span className="section-subtitle">Who We Are</span>
               <h2 className="section-title">
                 Result Driven <span>Digital Marketing &amp; Web Solutions</span>
@@ -307,13 +333,13 @@ const Page = () => {
             </div>
 
             <div className="about-grid">
-              <div className="about-content">
+              <div className="about-content" data-aos="fade-right">
                 {aboutParagraphs.map((para, index) => (
                   <p key={index}>{para}</p>
                 ))}
               </div>
 
-              <div className="about-highlights">
+              <div className="about-highlights" data-aos="fade-left" data-aos-delay="150">
                 <h3>Why Choose Aswebmatrix?</h3>
                 <ul className="about-list">
                   {aboutHighlights.map((item, index) => (
@@ -329,7 +355,7 @@ const Page = () => {
               </div>
             </div>
 
-            <p className="about-closing">
+            <p className="about-closing" data-aos="fade-up">
              Grow your brand, expand your reach, and achieve digital success with Aswebmatrix.
             </p>
           </div>
@@ -338,7 +364,7 @@ const Page = () => {
         {/* Client Showcase */}
         <section className="clients-showcase">
           <div className="container">
-            <div className="section-header">
+            <div className="section-header" data-aos="fade-up">
               <span className="section-subtitle">Real Clients, Real Results</span>
               <h2 className="section-title">Trusted by <span>Leading Organizations</span></h2>
               <p className="section-description">
@@ -346,31 +372,31 @@ const Page = () => {
               </p>
             </div>
             <div className="clients-grid">
-              <div className="client-card featured">
+              <div className="client-card featured" data-aos="fade-up" data-aos-delay="0">
                 <div className="client-icon"><i className="fas fa-university"></i></div>
                 <h3>Pt L.R. College of Technology</h3>
                 <p>College Website</p>
                 <span className="client-tag">Live Project</span>
               </div>
-              <div className="client-card featured">
+              <div className="client-card featured" data-aos="fade-up" data-aos-delay="100">
                 <div className="client-icon"><i className="fas fa-hospital-user"></i></div>
                 <h3>SK Healthcare</h3>
                 <p>Healthcare Website</p>
                 <span className="client-tag">Live Project</span>
               </div>
-              <div className="client-card">
+              <div className="client-card" data-aos="fade-up" data-aos-delay="200">
                 <div className="client-icon"><i className="fas fa-car"></i></div>
                 <h3>ZLD EGREEN </h3>
                 <p>Company Website</p>
                  <span className="client-tag">Live Project</span>
               </div>
-              <div className="client-card">
+              <div className="client-card" data-aos="fade-up" data-aos-delay="300">
                 <div className="client-icon"><i className="fas fa-building"></i></div>
                 <h3>Sutra Health </h3>
                 <p>Healthcare Website</p>
                 <span className="client-tag">Live Project</span>
               </div>
-              <div className="client-card">
+              <div className="client-card" data-aos="fade-up" data-aos-delay="400">
                 <div className="client-icon"><i className="fas fa-store"></i></div>
                 <h3>Pt. L.R. College of Pharmacy</h3>
                 <p>College Website</p>
@@ -383,7 +409,7 @@ const Page = () => {
         {/* Services Section */}
         <section className="services-section">
           <div className="container">
-            <div className="section-header">
+            <div className="section-header" data-aos="fade-up">
               <span className="section-subtitle">What We Offer</span>
               <h2 className="section-title">Our <span>Services</span></h2>
               <p className="section-description">
@@ -392,7 +418,7 @@ const Page = () => {
             </div>
             <div className="services-grid">
               {services.slice(0, 6).map((service, index) => (
-                <div className="service-card" key={index}>
+                <div className="service-card" key={index} data-aos="fade-up" data-aos-delay={index * 100}>
                   <div className="service-icon" style={{ background: service.color }}>
                     <i className={service.icon}></i>
                   </div>
@@ -403,7 +429,7 @@ const Page = () => {
             </div>
             <div className="services-grid second-row">
               {services.slice(6, 12).map((service, index) => (
-                <div className="service-card" key={index}>
+                <div className="service-card" key={index} data-aos="fade-up" data-aos-delay={index * 100}>
                   <div className="service-icon" style={{ background: service.color }}>
                     <i className={service.icon}></i>
                   </div>
@@ -418,7 +444,7 @@ const Page = () => {
         {/* Portfolio Preview */}
         <section id="portfolio" className="portfolio-section">
           <div className="container">
-            <div className="section-header">
+            <div className="section-header" data-aos="fade-up">
               <span className="section-subtitle">Our Work</span>
               <h2 className="section-title">Real Projects, <span>Real Results</span></h2>
               <p className="section-description">
@@ -427,7 +453,7 @@ const Page = () => {
             </div>
             <div className="portfolio-grid">
               {portfolioItems.map((item, index) => (
-                <div className="portfolio-card" key={index}>
+                <div className="portfolio-card" key={index} data-aos="fade-up" data-aos-delay={index * 100}>
                   <div className="portfolio-image">
                     <img src={item.image} alt={item.name} />
                     <div className="portfolio-overlay">
@@ -458,27 +484,27 @@ const Page = () => {
         {/* Results Section */}
         <section className="results-section">
           <div className="container">
-            <div className="section-header">
+            <div className="section-header" data-aos="fade-up">
               <span className="section-subtitle">Our Impact</span>
               <h2 className="section-title">Results That <span>Speak</span></h2>
             </div>
             <div className="results-grid">
-              <div className="result-card">
+              <div className="result-card" data-aos="zoom-in" data-aos-delay="0">
                 <div className="result-number">150%</div>
                 <div className="result-label">Increase in conversions</div>
                 <i className="fas fa-chart-line"></i>
               </div>
-              <div className="result-card">
+              <div className="result-card" data-aos="zoom-in" data-aos-delay="100">
                 <div className="result-number">500+</div>
                 <div className="result-label">Leads generated</div>
                 <i className="fas fa-users"></i>
               </div>
-              <div className="result-card">
+              <div className="result-card" data-aos="zoom-in" data-aos-delay="200">
                 <div className="result-number">200%</div>
                 <div className="result-label">Sales growth</div>
                 <i className="fas fa-chart-simple"></i>
               </div>
-              <div className="result-card">
+              <div className="result-card" data-aos="zoom-in" data-aos-delay="300">
                 <div className="result-number">60%</div>
                 <div className="result-label">Bounce rate reduction</div>
                 <i className="fas fa-chart-line"></i>
@@ -490,13 +516,13 @@ const Page = () => {
         {/* Process Section */}
         <section className="process-section">
           <div className="container">
-            <div className="section-header">
+            <div className="section-header" data-aos="fade-up">
               <span className="section-subtitle">Simple Process</span>
               <h2 className="section-title">How We <span>Work</span></h2>
             </div>
             <div className="process-steps">
-              {processSteps.map((step) => (
-                <div className="process-step" key={step.step}>
+              {processSteps.map((step, index) => (
+                <div className="process-step" key={step.step} data-aos="fade-up" data-aos-delay={index * 100}>
                   <div className="step-number">{step.step}</div>
                   <div className="step-icon">
                     <i className={step.icon}></i>
@@ -512,13 +538,13 @@ const Page = () => {
         {/* Why Choose Us Section */}
         <section className="why-choose-us">
           <div className="container">
-            <div className="section-header">
+            <div className="section-header" data-aos="fade-up">
               <span className="section-subtitle">Why Choose Us</span>
               <h2 className="section-title">Why <span>AS Web Matrix?</span></h2>
             </div>
             <div className="why-grid">
               {whyChooseUs.map((item, index) => (
-                <div className="why-card" key={index}>
+                <div className="why-card" key={index} data-aos="fade-up" data-aos-delay={index * 100}>
                   <div className="why-icon">
                     <i className={item.icon}></i>
                   </div>
@@ -594,7 +620,7 @@ const Page = () => {
         {/* Final Call to Action */}
         <section className="final-cta">
           <div className="container">
-            <div className="cta-content">
+            <div className="cta-content" data-aos="zoom-in">
               <h2>Ready to Build Your Website?</h2>
               <p>Join 35+ businesses growing with AS Web Matrix</p>
               <div className="cta-buttons">
@@ -615,7 +641,7 @@ const Page = () => {
         {/* Contact Information Footer */}
         <section className="contact-info-section">
           <div className="container">
-            <div className="contact-grid">
+            <div className="contact-grid" data-aos="fade-up">
               <div className="contact-item">
                 <i className="fas fa-phone-alt"></i>
                 <div className="contact-details">

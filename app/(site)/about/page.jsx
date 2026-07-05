@@ -1,11 +1,26 @@
 // app/about/page.jsx
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import './about.css';
 
 const Page = () => {
+
+  const [isAboutExpanded, setIsAboutExpanded] = useState(false);
+
+  // Initialize AOS (Animate On Scroll) once on mount
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 60,
+    });
+  }, []);
 
   const stats = [
     { number: "10+", label: "Projects Delivered", icon: "fas fa-laptop-code" },
@@ -31,13 +46,6 @@ const Page = () => {
     { icon: "fas fa-headset",           title: "Direct Access",      desc: "Work with actual developers — no account managers, no delays." },
     { icon: "fas fa-map-marker-alt",    title: "Local, Meetable",    desc: "Based in Faridabad. We can sit across the table and talk your project through." },
     { icon: "fas fa-check-circle",      title: "100% Satisfaction",  desc: "We don't close a project until you're completely happy with the result." },
-  ];
-
-  const milestones = [
-    { month: "Jan 2026", title: "Company Founded",       desc: "A.S Web Matrix started its website development journey in Faridabad.", icon: "fas fa-flag"     },
-    { month: "Feb 2026", title: "First Client — PTLR",   desc: "Partnered with PTLR College of Technology for their website and digital presence.", icon: "fas fa-trophy"  },
-    { month: "Feb 2026", title: "SKHealthcare.org",       desc: "Expanded into the healthcare sector with SKHealthcare.org.", icon: "fas fa-hospital" },
-    { month: "Jun 2026", title: "10+ Projects Delivered", desc: "Successfully completed 10+ website projects across education and healthcare.", icon: "fas fa-award"   },
   ];
 
   const clients = [
@@ -92,21 +100,21 @@ const Page = () => {
             </svg>
           </div>
 
-          <div className="about-container">
-            <div className="about-hero-content">
+          <div className="about-container about-hero-inner">
+            <div className="about-hero-content" data-aos="fade-right" data-aos-duration="900">
               <div className="about-hero-badge animate-fade-in">
-                <i className="fas fa-star"></i> Founded January 2026 &nbsp;·&nbsp; 10+ Projects Completed
+                <i className="fas fa-star"></i> Founded January 2026 &nbsp;·&nbsp; 50+ Projects Completed
               </div>
               <h1 className="animate-slide-up">
                 We Build Websites That <span className="highlight">Actually Work</span> for You
               </h1>
               <p className="about-hero-desc animate-slide-up-delay">
-                A.S Web Matrix is a Faridabad-based digital agency helping educational institutions,
+                AS Web Matrix is a Faridabad-based digital agency helping educational institutions,
                 healthcare organizations, and companies establish a powerful online presence through
                 modern web development and strategic SEO.
               </p>
               <div className="about-hero-stats animate-slide-up-delay">
-                <span><i className="fas fa-check-circle"></i> 10+ Projects Delivered</span>
+                <span><i className="fas fa-check-circle"></i> 50+ Projects Delivered</span>
                 <span><i className="fas fa-star"></i> 4.9 Google Rating</span>
                 <span><i className="fas fa-map-marker-alt"></i> Faridabad, Haryana</span>
               </div>
@@ -115,13 +123,31 @@ const Page = () => {
                 <Link href="/portfolio" className="cta-btn whatsapp-style">View Our Work</Link>
               </div>
             </div>
+
+            {/* Hero illustration — matches home page hero-image-wrap treatment */}
+            <div
+              className="about-hero-visual-wrap"
+              data-aos="fade-left"
+              data-aos-duration="900"
+              data-aos-delay="150"
+            >
+              <div className="about-hero-visual-glow" aria-hidden="true"></div>
+              <Image
+                src="/images/about page.png"
+                alt="AS Web Matrix — websites and digital solutions dashboard mockup"
+                className="about-hero-visual"
+                width={700}
+                height={700}
+                priority
+              />
+            </div>
           </div>
         </section>
 
         {/* ── STATS STRIP (same as trust-section on home page) ── */}
         <section className="about-trust-section">
           <div className="about-container">
-            <div className="about-trust-grid">
+            <div className="about-trust-grid" data-aos="fade-up" data-aos-duration="700">
               {stats.map((s) => (
                 <div className="about-trust-card" key={s.label}>
                   <div className="about-trust-number">{s.number}</div>
@@ -136,7 +162,7 @@ const Page = () => {
         {/* ── WHO WE ARE (matches about-section on home page) ── */}
         <section className="about-who-section">
           <div className="about-container">
-            <div className="about-section-header">
+            <div className="about-section-header" data-aos="fade-up">
               <span className="about-section-subtitle">Who We Are</span>
               <h2 className="about-section-title">
                 A Results-Driven <span>Digital Agency</span>
@@ -144,9 +170,9 @@ const Page = () => {
             </div>
 
             <div className="about-who-grid">
-              <div className="about-who-content">
+              <div className="about-who-content" data-aos="fade-right">
                 <p>
-                  A.S Web Matrix is a results-driven digital agency helping businesses grow through
+                  AS Web Matrix is a results-driven digital agency helping businesses grow through
                   innovative technology and strategic digital marketing. Our mission is to empower brands
                   with modern websites, strong search visibility, and AI-ready content strategies.
                 </p>
@@ -156,24 +182,42 @@ const Page = () => {
                   online experiences. We believe every business deserves a strong digital foundation
                   that not only looks professional but also performs effectively.
                 </p>
-                <p>
-                  With expertise in Next.js development, technical SEO, GEO, AEO, local SEO, and
-                  performance optimization, we help businesses connect with their audience across
-                  traditional search engines and emerging AI-powered search platforms.
-                </p>
-                <p className="about-who-highlight">
-                  We focus on transparency, quality, and long-term partnerships. Every project is built
-                  with scalability, performance, and future growth in mind. At A.S Web Matrix, we don't
-                  just create websites — we create digital ecosystems that generate leads, improve
-                  visibility, and achieve sustainable online success.
-                </p>
+
+                <div
+                  id="about-who-more"
+                  className={`about-who-collapsible ${isAboutExpanded ? 'is-expanded' : ''}`}
+                >
+                  <p>
+                    With expertise in Next.js development, technical SEO, GEO, AEO, local SEO, and
+                    performance optimization, we help businesses connect with their audience across
+                    traditional search engines and emerging AI-powered search platforms.
+                  </p>
+                  <p className="about-who-highlight">
+                    We focus on transparency, quality, and long-term partnerships. Every project is built
+                    with scalability, performance, and future growth in mind. At A.S Web Matrix, we don't
+                    just create websites — we create digital ecosystems that generate leads, improve
+                    visibility, and achieve sustainable online success.
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  className="about-read-more-btn"
+                  onClick={() => setIsAboutExpanded((prev) => !prev)}
+                  aria-expanded={isAboutExpanded}
+                  aria-controls="about-who-more"
+                >
+                  {isAboutExpanded ? 'Read Less' : 'Read More'}
+                  <i className={`fas fa-chevron-${isAboutExpanded ? 'up' : 'down'}`}></i>
+                </button>
+
                 <div className="about-skills">
                   {skills.map(t => <span className="about-skill-badge" key={t}>{t}</span>)}
                 </div>
               </div>
 
               {/* Right panel — dark card like home's about-highlights */}
-              <div className="about-who-highlights">
+              <div className="about-who-highlights" data-aos="fade-left">
                 <h3>Why Choose A.S Web Matrix?</h3>
                 <ul className="about-highlights-list">
                   {[
@@ -202,7 +246,7 @@ const Page = () => {
         {/* ── CLIENTS (same layout as clients-showcase on home page) ── */}
         <section className="about-clients-section">
           <div className="about-container">
-            <div className="about-section-header">
+            <div className="about-section-header" data-aos="fade-up">
               <span className="about-section-subtitle">Clients & Partners</span>
               <h2 className="about-section-title">Trusted by <span>These Organizations</span></h2>
               <p className="about-section-desc">
@@ -210,8 +254,8 @@ const Page = () => {
               </p>
             </div>
             <div className="about-clients-grid">
-              {clients.map((c) => (
-                <div className="about-client-card" key={c.name}>
+              {clients.map((c, i) => (
+                <div className="about-client-card" key={c.name} data-aos="fade-up" data-aos-delay={i * 80}>
                   <div className="about-client-icon"><i className={c.icon}></i></div>
                   <h3>{c.name}</h3>
                   <p>{c.type}</p>
@@ -219,7 +263,7 @@ const Page = () => {
                 </div>
               ))}
             </div>
-            <div className="about-clients-footer">
+            <div className="about-clients-footer" data-aos="fade-up">
               <p className="about-clients-footer-label">Currently working on</p>
               <div className="about-clients-footer-list">
                 <span>✓ PTLR College Website</span>
@@ -233,14 +277,14 @@ const Page = () => {
         {/* ── SERVICES (same as services-section on home page) ── */}
         <section className="about-services-section">
           <div className="about-container">
-            <div className="about-section-header">
+            <div className="about-section-header" data-aos="fade-up">
               <span className="about-section-subtitle">What We Offer</span>
               <h2 className="about-section-title">Our <span>Services</span></h2>
               <p className="about-section-desc">Complete digital solutions to help your business grow</p>
             </div>
             <div className="about-services-grid">
-              {services.map((s) => (
-                <div className="about-service-card" key={s.title}>
+              {services.map((s, i) => (
+                <div className="about-service-card" key={s.title} data-aos="fade-up" data-aos-delay={i * 80}>
                   <div className="about-service-icon" style={{ background: s.color }}>
                     <i className={s.icon}></i>
                   </div>
@@ -255,7 +299,7 @@ const Page = () => {
         {/* ── RESULTS STRIP (same as results-section on home page) ── */}
         <section className="about-results-section">
           <div className="about-container">
-            <div className="about-section-header">
+            <div className="about-section-header" data-aos="fade-up">
               <span className="about-section-subtitle">Our Impact</span>
               <h2 className="about-section-title" style={{ color: "#fff" }}>Numbers That <span>Speak</span></h2>
             </div>
@@ -265,8 +309,8 @@ const Page = () => {
                 { n: "2+",  l: "Healthcare Websites",  i: "fas fa-heart-pulse"    },
                 { n: "10+", l: "Canva Designs Made",   i: "fas fa-paint-brush"    },
                 { n: "1wk", l: "Avg Delivery Time",    i: "fas fa-bolt"           },
-              ].map(r => (
-                <div className="about-result-card" key={r.l}>
+              ].map((r, i) => (
+                <div className="about-result-card" key={r.l} data-aos="zoom-in" data-aos-delay={i * 100}>
                   <div className="about-result-number">{r.n}</div>
                   <div className="about-result-label">{r.l}</div>
                   <i className={r.i}></i>
@@ -276,39 +320,16 @@ const Page = () => {
           </div>
         </section>
 
-        {/* ── TIMELINE / PROCESS (same card style as process-section) ── */}
-        <section className="about-process-section">
-          <div className="about-container">
-            <div className="about-section-header">
-              <span className="about-section-subtitle">Our Journey</span>
-              <h2 className="about-section-title">Milestones That <span>Define Us</span></h2>
-            </div>
-            <div className="about-process-steps">
-              {milestones.map((m, i) => (
-                <div className="about-process-step" key={i}>
-                  <div className="about-step-number">{`0${i + 1}`}</div>
-                  <div className="about-step-icon">
-                    <i className={m.icon}></i>
-                  </div>
-                  <span className="about-step-month">{m.month}</span>
-                  <h3>{m.title}</h3>
-                  <p>{m.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* ── WHY CHOOSE US (same as why-choose-us on home page) ── */}
         <section className="about-why-section">
           <div className="about-container">
-            <div className="about-section-header">
+            <div className="about-section-header" data-aos="fade-up">
               <span className="about-section-subtitle">Why Choose Us</span>
               <h2 className="about-section-title">Why <span>A.S Web Matrix?</span></h2>
             </div>
             <div className="about-why-grid">
-              {whyUs.map((w) => (
-                <div className="about-why-card" key={w.title}>
+              {whyUs.map((w, i) => (
+                <div className="about-why-card" key={w.title} data-aos="fade-up" data-aos-delay={i * 80}>
                   <div className="about-why-icon"><i className={w.icon}></i></div>
                   <h3>{w.title}</h3>
                   <p>{w.desc}</p>
@@ -321,7 +342,7 @@ const Page = () => {
         {/* ── FINAL CTA (same as final-cta on home page) ── */}
         <section className="about-final-cta">
           <div className="about-container">
-            <div className="about-cta-content">
+            <div className="about-cta-content" data-aos="zoom-in">
               <h2>Ready to Build Your Website?</h2>
               <p>Join PTLR College, Fusion Advance, and SKHealthcare.org — businesses that trusted us</p>
               <div className="about-cta-buttons">
@@ -348,21 +369,21 @@ const Page = () => {
         <section className="about-contact-section">
           <div className="about-container">
             <div className="about-contact-grid">
-              <div className="about-contact-item">
+              <div className="about-contact-item" data-aos="fade-up" data-aos-delay="0">
                 <i className="fas fa-phone-alt"></i>
                 <div className="about-contact-details">
                   <span>Call Us</span>
                   <a href="tel:+919718401731">+91-9718401731</a>
                 </div>
               </div>
-              <div className="about-contact-item">
+              <div className="about-contact-item" data-aos="fade-up" data-aos-delay="100">
                 <i className="fas fa-envelope"></i>
                 <div className="about-contact-details">
                   <span>Email Us</span>
                   <a href="mailto:aswebmatrix@gmail.com">aswebmatrix@gmail.com</a>
                 </div>
               </div>
-              <div className="about-contact-item">
+              <div className="about-contact-item" data-aos="fade-up" data-aos-delay="200">
                 <i className="fas fa-map-marker-alt"></i>
                 <div className="about-contact-details">
                   <span>Visit Us</span>

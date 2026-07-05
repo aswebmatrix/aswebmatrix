@@ -1,6 +1,6 @@
 import Link from "next/link";
-import connectDB from "@/lib/mongodb";
-import Blog from "@/models/Blog";
+import connectDB from "../../lib/mongodb";
+import Blog from "../../models/Blog";
 
 export const metadata = {
   title: "Blog | A.S Web Matrix - SEO, Web Development & Digital Marketing",

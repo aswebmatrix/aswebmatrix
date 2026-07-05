@@ -1,0 +1,183 @@
+.wrap {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 999;
+  font-family: "Inter", sans-serif;
+}
+
+.launcher {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: #0e4f4a;
+  color: #f6f4ef;
+  font-size: 22px;
+  font-family: "Space Grotesk", sans-serif;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(14, 79, 74, 0.35);
+  transition: transform 0.15s ease;
+}
+.launcher:hover { transform: translateY(-2px); }
+
+.panel {
+  width: 340px;
+  max-height: 520px;
+  display: flex;
+  flex-direction: column;
+  background: #f6f4ef;
+  border: 1px solid #d9d4c8;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 0 20px 50px rgba(16, 35, 61, 0.18);
+}
+
+.header {
+  background: #0e4f4a;
+  color: #f6f4ef;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.headerEyebrow {
+  margin: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.headerTitle {
+  margin: 2px 0 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+.iconBtn {
+  background: none;
+  border: none;
+  color: #f6f4ef;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.thread {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 220px;
+}
+
+.bubbleBot, .bubbleUser {
+  max-width: 85%;
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+.bubbleBot {
+  background: #e4efec;
+  color: #10233d;
+  align-self: flex-start;
+  border-bottom-left-radius: 3px;
+}
+.bubbleUser {
+  background: #e8952f;
+  color: #10233d;
+  align-self: flex-end;
+  border-bottom-right-radius: 3px;
+}
+
+.ticketStub {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px dashed #10233d;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  background: #fff;
+}
+.ticketLabel { color: #4a5568; }
+.ticketId { color: #0e4f4a; font-weight: 600; }
+
+.ticketForm {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #d9d4c8;
+  border-radius: 10px;
+}
+.ticketForm input, .ticketForm textarea {
+  border: 1px solid #d9d4c8;
+  border-radius: 6px;
+  padding: 7px 9px;
+  font-size: 13px;
+  font-family: inherit;
+  resize: none;
+}
+.ticketForm button {
+  background: #0e4f4a;
+  color: #f6f4ef;
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 14px;
+  border-top: 1px solid #d9d4c8;
+}
+.chip {
+  background: #fff;
+  border: 1px solid #0e4f4a;
+  color: #0e4f4a;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.chip:hover { background: #0e4f4a; color: #f6f4ef; }
+
+.inputRow {
+  display: flex;
+  border-top: 1px solid #d9d4c8;
+  padding: 10px;
+  gap: 8px;
+}
+.inputRow input {
+  flex: 1;
+  border: 1px solid #d9d4c8;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-family: inherit;
+}
+.inputRow button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #e8952f;
+  color: #10233d;
+  font-size: 16px;
+  cursor: pointer;
+}
+.inputRow button:disabled { opacity: 0.5; cursor: not-allowed; }

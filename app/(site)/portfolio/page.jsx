@@ -3,13 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { 
   FaStar, FaStarHalfAlt, FaRegStar, 
   FaGoogle, FaExternalLinkAlt, FaGithub,
   FaCalendarAlt, FaUser,
   FaMapMarkerAlt, FaBriefcase, FaAward,
-  FaRocket, FaHeart, FaUsers, FaRupeeSign
+  FaRocket, FaHeart, FaUsers
 } from 'react-icons/fa';
 import './portfolio.css';
 
@@ -17,12 +18,24 @@ const PortfolioPage = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [mounted, setMounted] = useState(false);
 
-  // Component mount hone par check karo
+  // Component mount hone par check karo + AOS init
   useEffect(() => {
     setMounted(true);
-    console.log('Component mounted');
-    console.log('PROJECT folder path check:', window.location.origin + '/PROJECT/');
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 60,
+    });
   }, []);
+
+  // Filter change hone ke baad naye cards ko AOS refresh karo taaki
+  // animation dubara trigger ho (AOS sirf mount time ke elements track karta hai)
+  useEffect(() => {
+    if (mounted) {
+      AOS.refreshHard();
+    }
+  }, [activeFilter, mounted]);
 
   // ================== MANUAL GOOGLE REVIEWS ==================
   const reviews = [
@@ -160,27 +173,13 @@ const PortfolioPage = () => {
     { id: 'travel', name: 'Travel', count: projects.filter(p => p.category === 'travel').length }
   ];
 
-  // Filter change handler with debugging
   const handleFilterChange = (filterId) => {
-    console.log('Filter clicked:', filterId);
-    console.log('Previous filter:', activeFilter);
     setActiveFilter(filterId);
-    console.log('New filter set to:', filterId);
   };
 
-  // Filtered projects with debugging
   const getFilteredProjects = () => {
-    console.log('Getting filtered projects for:', activeFilter);
-    if (activeFilter === 'all') {
-      console.log('Returning all projects:', projects.length);
-      return projects;
-    }
-    const filtered = projects.filter(p => {
-      console.log(`Checking project ${p.title}: category=${p.category}, filter=${activeFilter}, match=${p.category === activeFilter}`);
-      return p.category === activeFilter;
-    });
-    console.log(`Filtered projects count:`, filtered.length);
-    return filtered;
+    if (activeFilter === 'all') return projects;
+    return projects.filter(p => p.category === activeFilter);
   };
 
   const filteredProjects = getFilteredProjects();
@@ -211,41 +210,31 @@ const PortfolioPage = () => {
     { icon: FaHeart, value: "100%", label: "Satisfaction" }
   ];
 
-  // Project link click handler with debugging
+  // Project link click handler
   const handleProjectClick = (e, url, title) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Project link clicked:', title);
-    console.log('URL:', url);
-    console.log('Full URL:', window.location.origin + url);
-    
+
     try {
-      // Check if file exists
       fetch(url, { method: 'HEAD' })
         .then(response => {
-          console.log('File check response:', response.status);
           if (response.ok) {
-            console.log('File exists, opening...');
             window.open(url, '_blank');
           } else {
-            console.log('File not found, status:', response.status);
             alert('Demo website file not found. Please check if the file exists in the PROJECT folder.');
           }
         })
-        .catch(error => {
-          console.error('Error checking file:', error);
-          // Still try to open
+        .catch(() => {
           window.open(url, '_blank');
         });
     } catch (error) {
-      console.error('Error in handleProjectClick:', error);
       alert('Error opening demo website. Please try again.');
     }
   };
 
   return (
     <div className="portfolio-page">
-      
+
       {/* Debug Info */}
       {mounted && (
         <div style={{ display: 'none' }}>
@@ -256,13 +245,19 @@ const PortfolioPage = () => {
       {/* ========== HERO SECTION ========== */}
       <section className="hero-section">
         <div className="hero-pattern"></div>
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="hero-content"
-          >
+
+        {/* Signature decorative element — faint ascending growth line tucked
+            into the bottom-right corner, same placement as the home page's
+            hero-graph, sitting behind the stats card. */}
+        <div className="hero-graph" aria-hidden="true">
+          <svg viewBox="0 0 600 220" preserveAspectRatio="none">
+            <path className="hero-graph-fill" d="M0,180 L60,165 L120,170 L180,130 L240,140 L300,95 L360,105 L420,60 L480,70 L540,30 L600,40 L600,220 L0,220 Z" />
+            <path className="hero-graph-line" d="M0,180 L60,165 L120,170 L180,130 L240,140 L300,95 L360,105 L420,60 L480,70 L540,30 L600,40" />
+          </svg>
+        </div>
+
+        <div className="container hero-inner">
+          <div className="hero-content" data-aos="fade-right" data-aos-duration="900">
             <span className="hero-badge">
               <FaBriefcase /> AS Web Matrix Portfolio
             </span>
@@ -275,40 +270,30 @@ const PortfolioPage = () => {
               See why businesses trust us for their digital needs.
             </p>
             
-            {/* Stats */}
-            <div className="stats-grid">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="stat-card"
-                >
-                  <stat.icon className="stat-icon" />
-                  <div className="stat-value">{stat.value}</div>
-                  <div className="stat-label">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-        <div className="hero-wave">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#ffffff" fillOpacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-          </svg>
+          </div>
+
+          {/* Stats — right column, matches the balance of about page's hero visual */}
+          <div className="stats-grid" data-aos="fade-left" data-aos-duration="900" data-aos-delay="150">
+            {stats.map((stat, index) => (
+              <div
+                key={index}
+                className="stat-card"
+                data-aos="zoom-in"
+                data-aos-delay={200 + index * 100}
+              >
+                <stat.icon className="stat-icon" />
+                <div className="stat-value">{stat.value}</div>
+                <div className="stat-label">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ========== GOOGLE REVIEWS SECTION ========== */}
       <section className="reviews-section">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="section-header"
-          >
+          <div className="section-header" data-aos="fade-up">
             <div className="google-badge">
               <FaGoogle className="google-icon" />
               <span className="google-title">Google Reviews</span>
@@ -320,16 +305,15 @@ const PortfolioPage = () => {
               <span className="rating-value">4.9</span>
               <span className="rating-count">({reviews.length} reviews)</span>
             </div>
-          </motion.div>
+          </div>
 
           <div className="reviews-grid">
             {reviews.map((review, index) => (
-              <motion.div
+              <div
                 key={review.id || index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
                 className="review-card"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
               >
                 <div className="review-card-inner">
                   <div className="review-header">
@@ -341,21 +325,21 @@ const PortfolioPage = () => {
                       <span className="review-time">{review.relative_time_description}</span>
                     </div>
                   </div>
-                  
+
                   <div className="review-rating">
                     {renderStars(review.rating)}
                   </div>
-                  
+
                   <p className="review-text">
                     "{review.text}"
                   </p>
-                  
+
                   <div className="review-source">
                     <FaGoogle className="source-icon" />
                     <span className="source-text">Google Review</span>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -364,46 +348,21 @@ const PortfolioPage = () => {
       {/* ========== PROJECTS SECTION ========== */}
       <section className="projects-section">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="section-header"
-          >
+          <div className="section-header" data-aos="fade-up">
             <h2 className="section-title">
               Our <span className="section-title-highlight">Projects</span>
             </h2>
             <p className="section-subtitle">
-              Check out some of our recent work - All websites are available in just ₹3000/-
+              Check out some of our recent work across industries
             </p>
-          </motion.div>
-
-          {/* Price Banner */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="price-banner"
-          >
-            <div className="price-banner-content">
-              <FaRupeeSign className="price-icon" />
-              <h3 className="price-title">Special Offer: All Websites Available for Just ₹3000/-</h3>
-              <p className="price-text">Get any demo website fully customized for your business at this amazing price!</p>
-              <Link href="/contact" className="price-button">
-                Claim This Offer
-              </Link>
-            </div>
-          </motion.div>
+          </div>
 
           {/* Filter Buttons */}
-          <div className="filter-container">
+          <div className="filter-container" data-aos="fade-up">
             {filters.map((filter) => (
               <button
                 key={filter.id}
-                onClick={() => {
-                  console.log('Filter button clicked:', filter.id);
-                  handleFilterChange(filter.id);
-                }}
+                onClick={() => handleFilterChange(filter.id)}
                 className={`filter-btn ${activeFilter === filter.id ? 'active' : ''}`}
               >
                 {filter.name} <span className="filter-count">{filter.count}</span>
@@ -415,46 +374,40 @@ const PortfolioPage = () => {
           <div className="projects-grid">
             {filteredProjects.length > 0 ? (
               filteredProjects.map((project, index) => (
-                <motion.div
+                <div
                   key={project.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
                   className="project-card"
+                  data-aos="fade-up"
+                  data-aos-delay={(index % 3) * 100}
                 >
                   <div className="project-image">
                     {project.image ? (
-                      <img 
-                        src={project.image} 
+                      <img
+                        src={project.image}
                         alt={project.title}
                         className="project-img"
                         onError={(e) => {
-                          console.log('Image failed to load:', project.image);
                           e.target.onerror = null;
                           e.target.src = "/PROJECT/placeholder.jpg";
                         }}
-                        onLoad={() => console.log('Image loaded successfully:', project.image)}
                       />
                     ) : (
                       <div className="project-image-placeholder">
                         <span className="project-category">{project.category}</span>
                       </div>
                     )}
-                    <div className="project-price-tag">
-                      <FaRupeeSign /> 3000/-
-                    </div>
                   </div>
-                  
+
                   <div className="project-content">
                     <h3 className="project-title">{project.title}</h3>
                     <p className="project-description">{project.description}</p>
-                    
+
                     <div className="project-tech">
                       {project.techStack.map((tech, i) => (
                         <span key={i} className="tech-tag">{tech}</span>
                       ))}
                     </div>
-                    
+
                     <div className="project-meta">
                       <span className="meta-item">
                         <FaUser className="meta-icon" />
@@ -465,34 +418,21 @@ const PortfolioPage = () => {
                         {project.year}
                       </span>
                     </div>
-                    
+
                     <div className="project-results">
                       <strong>Results:</strong> {project.results}
                     </div>
-                    
+
                     <div className="project-footer">
                       <div className="project-rating">
                         {renderStars(project.rating)}
                       </div>
-                      
+
                       <div className="project-links">
                         {project.liveUrl && (
                           <a
                             href={project.liveUrl}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              console.log('Demo link clicked for:', project.title);
-                              console.log('URL:', project.liveUrl);
-                              console.log('Full URL:', window.location.origin + project.liveUrl);
-                              
-                              // Try to open directly
-                              const fullUrl = window.location.origin + project.liveUrl;
-                              window.open(fullUrl, '_blank');
-                              
-                              // Alternative: try relative path
-                              // window.open(project.liveUrl, '_blank');
-                            }}
+                            onClick={(e) => handleProjectClick(e, project.liveUrl, project.title)}
                             className="project-link"
                             title="View Demo"
                           >
@@ -502,7 +442,7 @@ const PortfolioPage = () => {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))
             ) : (
               <div className="no-projects">
@@ -516,23 +456,15 @@ const PortfolioPage = () => {
       {/* ========== CTA SECTION ========== */}
       <section className="cta-section">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="cta-content"
-          >
+          <div className="cta-content" data-aos="zoom-in">
             <h2 className="cta-title">Ready to Start Your Project?</h2>
             <p className="cta-text">
               Join our happy clients and let's build something amazing together
             </p>
-            <p className="cta-price-highlight">
-              All websites starting from just <span className="price-highlight">₹3000/-</span>
-            </p>
             <Link href="/contact" className="cta-button">
               Get in Touch
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

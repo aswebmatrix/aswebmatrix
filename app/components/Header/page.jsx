@@ -51,7 +51,7 @@ const Header = () => {
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="container">
+      <div className="container1">
         <nav className="navbar">
           <div className="logo">
             <Link href="/">

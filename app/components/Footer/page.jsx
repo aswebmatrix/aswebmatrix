@@ -127,7 +127,7 @@ const Footer = () => {
             <h3>Our Services</h3>
             <ul className="footer-links">
               <li>
-                <Link href="/services/web-development">
+                <Link href="/pages/WebDevelopment">
                   <i className="fas fa-chevron-right"></i> Web Development
                 </Link>
               </li>

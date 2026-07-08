@@ -1,4 +1,3 @@
-
 'use client';
 import Image from "next/image";
 import React, { useState, useEffect } from 'react';
@@ -20,6 +19,7 @@ import {
 
 const Page = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isAboutExpanded, setIsAboutExpanded] = useState(false);
 
   // Initialize AOS (Animate On Scroll) once when the page mounts
   useEffect(() => {
@@ -50,9 +50,9 @@ const Page = () => {
   const aboutParagraphs = [
   `Aswebmatrix is a modern digital agency dedicated to helping businesses grow online through smart, creative, and result-driven solutions. Our mission is simple: to build a strong digital identity for your brand and help your business generate more leads, increase website traffic, and drive higher sales. Whether you are a startup, a local business, or an established company, we create customized digital strategies that strengthen your online presence and deliver measurable results.`,
 
-  `We offer a wide range of professional services, including website design, web development, search engine optimization (SEO), social media marketing, Google Ads management, branding, and performance marketing. Our experienced team leverages the latest digital trends, innovative technologies, and AI-powered marketing strategies to help your business stay ahead of the competition. We don’t just build visually appealing websites—we create fast, responsive, mobile-friendly, user-focused, and SEO-optimized digital experiences that enhance user engagement and improve search engine rankings.`,
+  `We offer a wide range of professional services, including website design, web development, search engine optimization (SEO), social media marketing, Google Ads management, branding, and performance marketing. Our experienced team leverages the latest digital trends, innovative technologies, and AI-powered marketing strategies to help your business stay ahead of the competition. We don't just build visually appealing websites—we create fast, responsive, mobile-friendly, user-focused, and SEO-optimized digital experiences that enhance user engagement and improve search engine rankings.`,
 
-  `In today’s competitive digital landscape, having a website alone is not enough. Businesses need strong online visibility to attract and convert potential customers. That’s why Aswebmatrix focuses on advanced SEO techniques, local SEO optimization, content marketing, and conversion-driven campaigns designed to connect your brand with the right audience. Our data-driven approach ensures that every marketing campaign is measurable, performance-oriented, and focused on maximizing return on investment.`,
+  `In today's competitive digital landscape, having a website alone is not enough. Businesses need strong online visibility to attract and convert potential customers. That's why Aswebmatrix focuses on advanced SEO techniques, local SEO optimization, content marketing, and conversion-driven campaigns designed to connect your brand with the right audience. Our data-driven approach ensures that every marketing campaign is measurable, performance-oriented, and focused on maximizing return on investment.`,
 
   `At Aswebmatrix, we believe in delivering more than just services—we build long-term partnerships. If you are looking for a professional website, high-quality digital marketing solutions, or a powerful branding strategy, we are here to help. With transparent communication, timely project delivery, and a commitment to sustainable business growth, we work closely with our clients to achieve lasting success. Our goal is not simply to complete projects but to become a trusted digital partner that supports your business growth at every stage of its journey.`
 ];
@@ -185,8 +185,8 @@ const Page = () => {
       "addressCountry": "IN"
     },
     "areaServed": ["Faridabad", "Delhi NCR", "India"],
-    "numberOfProjects": "50+",
-    "numberOfClients": "35+",
+    "numberOfProjects": "25+",
+    "numberOfClients": "25+",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.9",
@@ -251,16 +251,16 @@ const Page = () => {
           <div className="container hero-inner">
             <div className="hero-content" data-aos="fade-right" data-aos-duration="900">
               <div className="hero-badge animate-fade-in">
-                <i className="fas fa-star"></i> Trusted by 5+ Businesses
+                <i className="fas fa-star"></i> Trusted by 25+ Businesses
               </div>
               <h1 className="animate-slide-up">
                 We Build Websites That <span className="highlight">Grow Your Business</span>
               </h1>
               <p className="hero-description animate-slide-up-delay">
-                Trusted by 35+ businesses, we create websites and digital solutions that generate leads and boost your online presence.
+                Trusted by 25+ businesses, we create websites and digital solutions that generate leads and boost your online presence.
               </p>
               <div className="hero-stats animate-slide-up-delay-2">
-                <span><i className="fas fa-check-circle"></i> 5+ Projects Delivered</span>
+                <span><i className="fas fa-check-circle"></i> 25+ Projects Delivered</span>
                 <span><i className="fas fa-star"></i> 4.9 Google Rating</span>
               </div>
               <div className="hero-buttons">
@@ -297,12 +297,12 @@ const Page = () => {
           <div className="container">
             <div className="trust-grid" data-aos="fade-up">
               <div className="trust-card">
-                <div className="trust-number">5+</div>
+                <div className="trust-number">25+</div>
                 <div className="trust-label">Projects Completed</div>
                 <i className="fas fa-laptop-code"></i>
               </div>
               <div className="trust-card">
-                <div className="trust-number">10+</div>
+                <div className="trust-number">25+</div>
                 <div className="trust-label">Happy Clients</div>
                 <i className="fas fa-smile"></i>
               </div>
@@ -334,9 +334,24 @@ const Page = () => {
 
             <div className="about-grid">
               <div className="about-content" data-aos="fade-right">
-                {aboutParagraphs.map((para, index) => (
+                {aboutParagraphs.slice(0, 2).map((para, index) => (
                   <p key={index}>{para}</p>
                 ))}
+                {isAboutExpanded && (
+                  <>
+                    {aboutParagraphs.slice(2).map((para, index) => (
+                      <p key={index + 2}>{para}</p>
+                    ))}
+                  </>
+                )}
+                <button
+                  onClick={() => setIsAboutExpanded((prev) => !prev)}
+                  className="read-more-btn"
+                  aria-expanded={isAboutExpanded}
+                >
+                  {isAboutExpanded ? 'Read Less' : 'Read More'}
+                  <i className={`fas ${isAboutExpanded ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
+                </button>
               </div>
 
               <div className="about-highlights" data-aos="fade-left" data-aos-delay="150">
@@ -687,7 +702,7 @@ const Page = () => {
           color: white;
           font-weight: 600;
           cursor: pointer;
-          z-index: 999;
+          z-index: 500;
           display: flex;
           align-items: center;
           gap: 10px;

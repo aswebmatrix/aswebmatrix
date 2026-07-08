@@ -273,7 +273,7 @@ const ConsultationPopup = ({ isOpen, onClose }) => {
           bottom: 0;
           background: rgba(0, 0, 0, 0.85);
           backdrop-filter: blur(5px);
-          z-index: 9999;
+          z-index: 500;
           display: flex;
           align-items: center;
           justify-content: center;
